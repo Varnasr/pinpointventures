@@ -1,2 +1,3 @@
-# pinpointventures
-Research and evaluation services for the development and social impact sectors.
+# Pinpoint Ventures
+
+Starter landing page project.
