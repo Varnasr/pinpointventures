@@ -40,6 +40,7 @@ nav {
 .banner {
   width: 100%;
   height: auto;
+  display: block;
 }
 
 .hero-text-block {
@@ -80,16 +81,6 @@ section {
 
 h2 {
   color: #6a0572;
-  position: relative;
-}
-
-.scribble {
-  font-size: 1.2rem;
-  color: #f4a261;
-}
-
-ul {
-  margin-top: 1rem;
 }
 
 footer {
