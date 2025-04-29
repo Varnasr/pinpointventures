@@ -1,51 +1,81 @@
 
-body {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+body, html {
   margin: 0;
   padding: 0;
-  background-color: #f5f5f5;
-  line-height: 1.6;
-  color: #333333;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
-header, footer {
-  background: linear-gradient(135deg, #0d3b66, #074173);
-  color: #fff;
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: #0d3b66;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.hero-section {
+  height: 90vh;
+  background: linear-gradient(to right, #d0e8f2, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 3rem 1rem;
+  background-image: url('https://www.svgbackgrounds.com/wp-content/uploads/2021/03/wave-haikei.svg');
   background-size: cover;
+  background-position: center;
 }
 
-section {
-  padding: 2rem;
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 8px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
+.hero-text h1 {
+  font-size: 2.5rem;
   color: #0d3b66;
 }
 
-ul {
-  list-style-type: disc;
-  margin-left: 2rem;
-}
-
-a {
-  color: #f4a261;
+.btn {
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #f4a261;
+  color: white;
+  border: none;
+  border-radius: 5px;
   text-decoration: none;
+  font-size: 1rem;
 }
 
-a:hover {
-  text-decoration: underline;
+.btn:hover {
+  background-color: #e76f51;
 }
 
-footer p {
-  font-size: 0.8rem;
-  margin: 0;
+section {
+  padding: 60px 50px;
+  background: #f5f5f5;
+}
+
+h2 {
+  color: #0d3b66;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #0d3b66;
+  color: white;
 }
