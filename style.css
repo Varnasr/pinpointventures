@@ -58,7 +58,11 @@ h2 {
 }
 
 .teal-bg {
-  background-color: #0d3b66;
+  background-color: #008080;
+  color: white;
+}
+
+.teal-bg h2 {
   color: white;
 }
 
