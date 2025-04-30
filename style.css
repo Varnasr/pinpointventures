@@ -57,6 +57,38 @@ h2 {
   color: #6a0572;
 }
 
+blockquote {
+  font-style: italic;
+  margin: 1rem 0;
+  border-left: 4px solid #6a0572;
+  padding-left: 1rem;
+  color: #555;
+}
+
+form input, form textarea {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Poppins', sans-serif;
+}
+
+form button {
+  background-color: #6a0572;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #5a045d;
+}
+
 footer {
   text-align: center;
   background-color: #0d3b66;
