@@ -1,77 +1,906 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>PinPoint Ventures</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PinPoint Ventures | Development Sector Research & Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="grad1" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:0"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23grad1)"/><circle cx="800" cy="600" r="400" fill="url(%23grad1)"/></svg>') no-repeat;
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-sketch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-sketch svg {
+            max-width: 100%;
+            height: auto;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #2d3748 0%, #667eea 50%, #38b2ac 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: slideInUp 1s ease-out 0.4s both;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #2d3748 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #38b2ac);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 10px;
+        }
+
+        .service-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+
+        .service-card p {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+
+        /* Expertise Section */
+        .expertise {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .expertise-tag {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            text-align: center;
+            font-weight: 600;
+            color: #4a5568;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .expertise-tag:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .expertise-tag:nth-child(4n+1) { border-left: 4px solid #667eea; }
+        .expertise-tag:nth-child(4n+2) { border-left: 4px solid #764ba2; }
+        .expertise-tag:nth-child(4n+3) { border-left: 4px solid #38b2ac; }
+        .expertise-tag:nth-child(4n+4) { border-left: 4px solid #81e6d9; }
+
+        /* About Section */
+        .about {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .about-text p {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .about-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .about-visual svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+        }
+
+        .contact .section-title {
+            background: linear-gradient(135deg, #white 0%, #81e6d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #81e6d9;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 178, 172, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-sketch {
+                order: -1;
+            }
+            
+            .hero-sketch svg {
+                width: 300px;
+                height: 200px;
+            }
+            
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .services-grid,
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Decorative sketchy elements */
+        .section-decorator {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .sketch-divider {
+            opacity: 0.6;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-<nav>
-  <div class="logo">PinPoint Ventures</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#approach">Approach</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#testimonials">Quotes</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="insights.html">Insights</a></li>
-    <li><a href="learnings.html">Learnings</a></li>
-  </ul>
-</nav>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Hand-drawn style logo -->
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="50%" style="stop-color:#764ba2"/>
+                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                        </linearGradient>
+                    </defs>
+                    <!-- Sketchy pin/location marker -->
+                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
+                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2" 
+                          style="filter: url(#roughen);"/>
+                    <!-- Inner dot -->
+                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
+                    <!-- Sketchy lines suggesting data/research -->
+                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    
+                    <!-- SVG filter for hand-drawn effect -->
+                    <defs>
+                        <filter id="roughen">
+                            <feTurbulence baseFrequency="0.04" numOctaves="3" result="noise"/>
+                        </filter>
+                    </defs>
+                </svg>
+                PinPoint Ventures
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<header class="hero-section">
-  <img src="assets/pinpoint-handdrawn-banner.png" alt="PinPoint Ventures Banner" class="banner">
-</header>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Development Research.<br>Precisely Delivered.</h1>
+                    <p>Leading development sector consulting and research project captaincy services across India and South Asia. We deliver bespoke quantitative and qualitative analysis that drives meaningful impact.</p>
+                    <a href="#contact" class="cta-button">Start Your Project</a>
+                </div>
+                <div class="hero-sketch">
+                    <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hand-drawn research illustration -->
+                        <defs>
+                            <linearGradient id="chartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8"/>
+                                <stop offset="100%" style="stop-color:#38b2ac;stop-opacity:0.8"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Sketchy chart/graph -->
+                        <rect x="50" y="50" width="280" height="180" fill="none" stroke="#2d3748" stroke-width="2" rx="8" 
+                              style="stroke-dasharray: 2,1;"/>
+                        
+                        <!-- Bar chart bars (sketchy) -->
+                        <rect x="80" y="140" width="25" height="70" fill="url(#chartGrad)" stroke="#2d3748" stroke-width="1.5" rx="2"/>
+                        <rect x="120" y="110" width="25" height="100" fill="#764ba2" stroke="#2d3748" stroke-width="1.5" rx="2" opacity="0.8"/>
+                        <rect x="160" y="90" width="25" height="120" fill="url(#chartGrad)" stroke="#2d3748" stroke-width="1.5" rx="2"/>
+                        <rect x="200" y="120" width="25" height="90" fill="#81e6d9" stroke="#2d3748" stroke-width="1.5" rx="2" opacity="0.8"/>
+                        <rect x="240" y="80" width="25" height="130" fill="#667eea" stroke="#2d3748" stroke-width="1.5" rx="2" opacity="0.8"/>
+                        
+                        <!-- Sketchy trend line -->
+                        <path d="M80 160 Q120 140, 160 120 T240 100" stroke="#764ba2" stroke-width="3" fill="none" 
+                              style="stroke-linecap: round;"/>
+                        
+                        <!-- Data points (sketchy circles) -->
+                        <circle cx="92" cy="155" r="4" fill="#2d3748"/>
+                        <circle cx="132" cy="130" r="4" fill="#2d3748"/>
+                        <circle cx="172" cy="110" r="4" fill="#2d3748"/>
+                        <circle cx="212" cy="125" r="4" fill="#2d3748"/>
+                        <circle cx="252" cy="95" r="4" fill="#2d3748"/>
+                        
+                        <!-- Sketchy magnifying glass -->
+                        <circle cx="320" cy="80" r="20" fill="none" stroke="#667eea" stroke-width="3"/>
+                        <line x1="335" y1="95" x2="350" y2="110" stroke="#667eea" stroke-width="3" stroke-linecap="round"/>
+                        
+                        <!-- Sketchy papers/documents -->
+                        <rect x="280" y="160" width="40" height="50" fill="white" stroke="#2d3748" stroke-width="1.5" rx="3"/>
+                        <line x1="285" y1="170" x2="315" y2="170" stroke="#4a5568" stroke-width="1"/>
+                        <line x1="285" y1="180" x2="310" y2="180" stroke="#4a5568" stroke-width="1"/>
+                        <line x1="285" y1="190" x2="315" y2="190" stroke="#4a5568" stroke-width="1"/>
+                        
+                        <!-- Decorative sketchy elements -->
+                        <path d="M20 30 Q25 20, 30 25 T40 30" stroke="#38b2ac" stroke-width="2" fill="none" opacity="0.6"/>
+                        <path d="M350 40 Q360 35, 370 40 T380 45" stroke="#764ba2" stroke-width="2" fill="none" opacity="0.6"/>
+                        <circle cx="25" cy="250" r="3" fill="#81e6d9" opacity="0.7"/>
+                        <circle cx="370" cy="270" r="3" fill="#667eea" opacity="0.7"/>
+                        
+                        <!-- Sketchy arrow pointing to insights -->
+                        <path d="M300 120 Q320 115, 340 120" stroke="#2d3748" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                        <text x="345" y="125" font-family="Arial" font-size="12" fill="#2d3748" font-style="italic">insights</text>
+                        
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#2d3748"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="about">
-  <h2>About Us</h2>
-  <p>PinPoint Ventures is a specialist research and evaluation partner for organizations committed to social good. We work at the intersection of data, human-centered inquiry, and systems thinking to help programs maximize their effectiveness, equity, and impact. Founded by senior researchers with extensive field experience, we bring methodological rigor and practical insight to every engagement — from remote field sites to policy advisory tables.</p>
-</section>
+    <!-- Sketchy divider -->
+    <div class="section-decorator">
+        <svg width="200" height="30" viewBox="0 0 200 30" xmlns="http://www.w3.org/2000/svg" class="sketch-divider">
+            <path d="M20 15 Q60 5, 100 15 T180 15" stroke="#667eea" stroke-width="2" fill="none" opacity="0.6"/>
+            <circle cx="50" cy="15" r="2" fill="#38b2ac" opacity="0.7"/>
+            <circle cx="100" cy="15" r="2" fill="#764ba2" opacity="0.7"/>
+            <circle cx="150" cy="15" r="2" fill="#81e6d9" opacity="0.7"/>
+        </svg>
+    </div>
 
-<section id="approach">
-  <h2>Our Approach</h2>
-  <ul>
-    <li><strong>Rigor:</strong> Using sound, context-tailored methodologies.</li>
-    <li><strong>Empathy:</strong> Centering community voices in research.</li>
-    <li><strong>Partnership:</strong> Co-creating learning with clients.</li>
-    <li><strong>Integrity:</strong> Prioritizing transparency and ethics.</li>
-  </ul>
-</section>
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Core Services</h2>
+            <div class="services-grid fade-in">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Sketchy consulting/meeting icon -->
+                            <circle cx="12" cy="12" r="6" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="28" cy="12" r="6" fill="none" stroke="white" stroke-width="2"/>
+                            <path d="M6 25 Q12 20, 18 25" stroke="white" stroke-width="2" fill="none"/>
+                            <path d="M22 25 Q28 20, 34 25" stroke="white" stroke-width="2" fill="none"/>
+                            <!-- Sketchy speech bubbles -->
+                            <ellipse cx="20" cy="30" rx="8" ry="4" fill="none" stroke="white" stroke-width="1.5"/>
+                            <path d="M16 34 L18 32 L20 34" stroke="white" stroke-width="1.5" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>Development Sector Consulting</h3>
+                    <p>Strategic consulting services for development organizations, government agencies, and NGOs across India and South Asia with deep sectoral expertise.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Sketchy target/bullseye -->
+                            <circle cx="20" cy="20" r="15" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="10" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="5" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="20" cy="20" r="2" fill="white"/>
+                            <!-- Sketchy arrow -->
+                            <path d="M5 5 L18 18" stroke="white" stroke-width="2" marker-end="url(#arrow)"/>
+                            <defs>
+                                <marker id="arrow" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto">
+                                    <polygon points="0 0, 6 3, 0 6" fill="white"/>
+                                </marker>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h3>Research Project Captaincy</h3>
+                    <p>End-to-end research project management from design to delivery, ensuring rigorous methodology and actionable insights for policy and practice.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Sketchy bar chart -->
+                            <rect x="5" y="25" width="6" height="12" fill="white" stroke="white" stroke-width="1"/>
+                            <rect x="14" y="20" width="6" height="17" fill="white" stroke="white" stroke-width="1"/>
+                            <rect x="23" y="15" width="6" height="22" fill="white" stroke="white" stroke-width="1"/>
+                            <rect x="32" y="18" width="6" height="19" fill="white" stroke="white" stroke-width="1"/>
+                            <!-- Sketchy trend line -->
+                            <path d="M8 30 Q17 25, 26 20 T35 22" stroke="white" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <h3>Quantitative Analysis</h3>
+                    <p>Advanced statistical analysis, impact evaluations, and econometric modeling tailored to development sector challenges and policy questions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Sketchy speech/conversation bubbles -->
+                            <ellipse cx="15" cy="15" rx="12" ry="8" fill="none" stroke="white" stroke-width="2"/>
+                            <path d="M8 20 L10 18 L12 20" stroke="white" stroke-width="2" fill="none"/>
+                            <ellipse cx="25" cy="25" rx="10" ry="6" fill="none" stroke="white" stroke-width="2"/>
+                            <path d="M32 28 L30 30 L28 28" stroke="white" stroke-width="2" fill="none"/>
+                            <!-- Sketchy quote marks -->
+                            <text x="10" y="13" fill="white" font-size="8" font-family="serif">"</text>
+                            <text x="20" y="23" fill="white" font-size="6" font-family="serif">"</text>
+                        </svg>
+                    </div>
+                    <h3>Qualitative Research</h3>
+                    <p>In-depth qualitative studies including ethnographic research, stakeholder interviews, and participatory methods for nuanced understanding.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section id="services">
-  <h2>Our Services</h2>
-  <ul>
-    <li>Program Monitoring, Evaluation, and Learning (MEL)</li>
-    <li>Baseline, Midline, and Endline Surveys</li>
-    <li>Qualitative and Ethnographic Research</li>
-    <li>Knowledge Product Development</li>
-    <li>Impact Assessment and Data Analysis</li>
-    <li>Theory of Change and Strategic Advisory</li>
-    <li>Systems Mapping for Complex Interventions</li>
-  </ul>
-</section>
+    <!-- Sketchy divider -->
+    <div class="section-decorator">
+        <svg width="150" height="40" viewBox="0 0 150 40" xmlns="http://www.w3.org/2000/svg" class="sketch-divider">
+            <path d="M10 20 Q40 10, 75 20 T140 20" stroke="#764ba2" stroke-width="2" fill="none" opacity="0.6"/>
+            <path d="M20 25 Q50 30, 80 25 T130 25" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <circle cx="30" cy="18" r="1.5" fill="#667eea" opacity="0.6"/>
+            <circle cx="75" cy="22" r="1.5" fill="#81e6d9" opacity="0.6"/>
+            <circle cx="120" cy="20" r="1.5" fill="#764ba2" opacity="0.6"/>
+        </svg>
+    </div>
 
-<section id="testimonials" class="teal-bg">
-  <h2>What Our Clients Say</h2>
-  <blockquote>
-    “The PinPoint team brought rigour, responsiveness, and a deep sense of respect to our complex, multi-country evaluation. Their final outputs were not only evidence-rich but truly usable for our internal learning.”
-    <footer>— Senior Evaluation Lead, a global foundation</footer>
-  </blockquote>
-  <blockquote>
-    “What stood out was their ability to navigate sensitive qualitative fieldwork in fragile contexts. The insights we gained shifted how our leadership viewed impact measurement entirely.”
-    <footer>— Regional MEL Director, a global foundation</footer>
-  </blockquote>
-</section>
+    <!-- Expertise Section -->
+    <section id="expertise" class="expertise">
+        <div class="container">
+            <h2 class="section-title">Areas of Expertise</h2>
+            <div class="expertise-grid fade-in">
+                <div class="expertise-tag">Development Economics</div>
+                <div class="expertise-tag">Social Safety Nets</div>
+                <div class="expertise-tag">Decent Work & Labour</div>
+                <div class="expertise-tag">Data Feminism</div>
+                <div class="expertise-tag">Climate Change & Justice</div>
+                <div class="expertise-tag">Digital Development Ethics</div>
+                <div class="expertise-tag">Gender Studies</div>
+                <div class="expertise-tag">Public Health Systems</div>
+                <div class="expertise-tag">Education & Pedagogy</div>
+                <div class="expertise-tag">Livelihoods Research</div>
+                <div class="expertise-tag">Multivariate Analysis</div>
+                <div class="expertise-tag">Constitutional Law</div>
+                <div class="expertise-tag">Impact Evaluation</div>
+                <div class="expertise-tag">Policy Analysis</div>
+                <div class="expertise-tag">Participatory Research</div>
+                <div class="expertise-tag">Social Protection</div>
+            </div>
+        </div>
+    </section>
 
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Email us directly at <a href="mailto:contact@pinpointventures.in">contact@pinpointventures.in</a></p>
-</section>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <h2>Research Excellence Rooted in Context</h2>
+                    <p>PinPoint Ventures bridges the gap between rigorous academic research and practical development solutions. Based in India, we understand the nuanced challenges of South Asian development contexts.</p>
+                    <p>Our team combines deep theoretical knowledge with hands-on field experience across sectors including health, education, livelihoods, governance, and social protection.</p>
+                    <p>We specialize in translating complex research questions into actionable insights that inform policy, improve programs, and create lasting impact for vulnerable communities.</p>
+                </div>
+                <div class="about-visual">
+                    <svg width="350" height="300" viewBox="0 0 350 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Hand-drawn illustration of development work -->
+                        <defs>
+                            <linearGradient id="buildingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8"/>
+                                <stop offset="100%" style="stop-color:#38b2ac;stop-opacity:0.8"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Sketchy landscape/community -->
+                        <path d="M0 250 Q50 240, 100 245 T200 250 T350 245" stroke="#4a5568" stroke-width="2" fill="none"/>
+                        
+                        <!-- Sketchy buildings/community structures -->
+                        <rect x="50" y="180" width="40" height="70" fill="url(#buildingGrad)" stroke="#2d3748" stroke-width="2" rx="3"/>
+                        <rect x="120" y="160" width="35" height="90" fill="#764ba2" stroke="#2d3748" stroke-width="2" rx="3" opacity="0.8"/>
+                        <rect x="180" y="170" width="45" height="80" fill="#81e6d9" stroke="#2d3748" stroke-width="2" rx="3" opacity="0.8"/>
+                        <rect x="250" y="190" width="38" height="60" fill="#667eea" stroke="#2d3748" stroke-width="2" rx="3" opacity="0.8"/>
+                        
+                        <!-- Sketchy roofs -->
+                        <polygon points="45,180 70,160 95,180" fill="#2d3748" stroke="#2d3748" stroke-width="1"/>
+                        <polygon points="115,160 137.5,140 160,160" fill="#2d3748" stroke="#2d3748" stroke-width="1"/>
+                        <polygon points="175,170 202.5,150 230,170" fill="#2d3748" stroke="#2d3748" stroke-width="1"/>
+                        <polygon points="245,190 269,170 293,190" fill="#2d3748" stroke="#2d3748" stroke-width="1"/>
+                        
+                        <!-- Sketchy people figures -->
+                        <circle cx="30" cy="220" r="8" fill="#f7fafc" stroke="#2d3748" stroke-width="2"/>
+                        <rect x="26" y="228" width="8" height="20" fill="#667eea" stroke="#2d3748" stroke-width="1.5" rx="2"/>
+                        
+                        <circle cx="300" cy="210" r="8" fill="#f7fafc" stroke="#2d3748" stroke-width="2"/>
+                        <rect x="296" y="218" width="8" height="20" fill="#38b2ac" stroke="#2d3748" stroke-width="1.5" rx="2"/>
+                        
+                        <!-- Sketchy research elements -->
+                        <rect x="100" y="100" width="150" height="80" fill="white" stroke="#2d3748" stroke-width="2" rx="8" opacity="0.9"/>
+                        <text x="175" y="125" text-anchor="middle" font-family="Arial" font-size="12" fill="#2d3748" font-weight="bold">Research Impact</text>
+                        
+                        <!-- Sketchy chart inside -->
+                        <rect x="115" y="135" width="15" height="25" fill="#667eea" opacity="0.7"/>
+                        <rect x="135" y="145" width="15" height="15" fill="#764ba2" opacity="0.7"/>
+                        <rect x="155" y="130" width="15" height="30" fill="#38b2ac" opacity="0.7"/>
+                        <rect x="175" y="140" width="15" height="20" fill="#81e6d9" opacity="0.7"/>
+                        <rect x="195" y="125" width="15" height="35" fill="#667eea" opacity="0.7"/>
+                        <rect x="215" y="135" width="15" height="25" fill="#764ba2" opacity="0.7"/>
+                        
+                        <!-- Sketchy connecting lines/network -->
+                        <path d="M70 200 Q120 180, 140 200" stroke="#667eea" stroke-width="2" fill="none" opacity="0.6" stroke-dasharray="3,2"/>
+                        <path d="M155 200 Q200 180, 220 200" stroke="#38b2ac" stroke-width="2" fill="none" opacity="0.6" stroke-dasharray="3,2"/>
+                        <path d="M240 210 Q280 190, 300 210" stroke="#764ba2" stroke-width="2" fill="none" opacity="0.6" stroke-dasharray="3,2"/>
+                        
+                        <!-- Sketchy sun -->
+                        <circle cx="300" cy="50" r="20" fill="#ffd700" stroke="#2d3748" stroke-width="2" opacity="0.8"/>
+                        <path d="M280 30 L285 35" stroke="#ffd700" stroke-width="2"/>
+                        <path d="M320 30 L315 35" stroke="#ffd700" stroke-width="2"/>
+                        <path d="M320 70 L315 65" stroke="#ffd700" stroke-width="2"/>
+                        <path d="M280 70 L285 65" stroke="#ffd700" stroke-width="2"/>
+                        
+                        <!-- Sketchy trees -->
+                        <circle cx="20" cy="180" r="15" fill="#4ade80" stroke="#2d3748" stroke-width="2" opacity="0.7"/>
+                        <rect x="18" y="195" width="4" height="20" fill="#8b4513" stroke="#2d3748" stroke-width="1"/>
+                        
+                        <circle cx="320" cy="170" r="12" fill="#4ade80" stroke="#2d3748" stroke-width="2" opacity="0.7"/>
+                        <rect x="318" y="182" width="4" height="18" fill="#8b4513" stroke="#2d3748" stroke-width="1"/>
+                        
+                        <!-- Sketchy birds -->
+                        <path d="M80 80 Q85 75, 90 80 Q95 75, 100 80" stroke="#2d3748" stroke-width="1.5" fill="none"/>
+                        <path d="M200 70 Q205 65, 210 70 Q215 65, 220 70" stroke="#2d3748" stroke-width="1.5" fill="none"/>
+                        
+                        <!-- Decorative sketchy elements -->
+                        <circle cx="280" cy="120" r="2" fill="#667eea" opacity="0.6"/>
+                        <circle cx="290" cy="130" r="2" fill="#38b2ac" opacity="0.6"/>
+                        <circle cx="270" cy="140" r="2" fill="#764ba2" opacity="0.6"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<footer>
-  <p>&copy; 2025 PinPoint Ventures | Rigorous Research for Real-World Impact</p>
-</footer>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Collaborate</h2>
+            <div class="contact-content fade-in">
+                <div class="contact-info">
+                    <h3>Ready to Start Your Project?</h3>
+                    <p>Whether you need strategic consulting, research project management, or specialized analysis, we're here to help you achieve your development goals.</p>
+                    <p><strong>Based in India</strong><br>
+                    Serving South Asia and beyond</p>
+                    <p>Email: hello@pinpointventures.in<br>
+                    Phone: +91 XXX XXX XXXX</p>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Organization">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="4" placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 PinPoint Ventures. Development research and consulting services across India and South Asia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Form handling
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Interactive expertise tags
+        document.querySelectorAll('.expertise-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                this.style.color = 'white';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+                this.style.color = '#4a5568';
+            });
+        });
+    </script>
 </body>
 </html>
