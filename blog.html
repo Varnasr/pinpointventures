@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - PinPoint Ventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-grey: #f8fafc;
+            --medium-grey: #e2e8f0;
+            --dark-grey: #475569;
+            --light-blue: #0ea5e9;
+            --violet: #8b5cf6;
+            --teal: #14b8a6;
+            --white: #ffffff;
+            --black: #1e293b;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header - Same as homepage */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--medium-grey);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--violet);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--violet);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--medium-grey);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--soft-grey);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--teal) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--white);
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--medium-grey);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--soft-grey);
+            border: 2px solid var(--medium-grey);
+            border-radius: 25px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--violet);
+            color: var(--white);
+            border-color: var(--violet);
+            transform: translateY(-2px);
+        }
+
+        /* Blog Content */
+        .blog-content {
+            padding: 4rem 0;
+            background: var(--soft-grey);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--medium-grey);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .blog-card-header {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, var(--violet), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-category {
+            background: var(--violet);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .blog-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+            line-height: 1.3;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
+            color: var(--violet);
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .read-more:hover {
+            color: var(--teal);
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .author-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--violet);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Featured Post */
+        .featured-post {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--medium-grey);
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .featured-image {
+            height: 300px;
+            background: linear-gradient(135deg, var(--teal), var(--light-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 4rem;
+        }
+
+        .featured-text {
+            padding: 2rem;
+        }
+
+        .featured-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .featured-text p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--violet), var(--light-blue));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Newsletter Signup */
+        .newsletter {
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-grey) 100%);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--violet), var(--teal));
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                height: 200px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="50%" style="stop-color:#0ea5e9"/>
+                            <stop offset="100%" style="stop-color:#14b8a6"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#logoGrad)" opacity="0.1"/>
+                    <path d="M30 35 L50 25 L70 35 L70 55 L50 75 L30 55 Z" fill="url(#logoGrad)" stroke="#334155" stroke-width="2"/>
+                    <circle cx="50" cy="45" r="8" fill="white" stroke="#334155" stroke-width="2"/>
+                    <path d="M35 25 Q40 20 45 25" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                    <path d="M55 25 Q60 20 65 25" stroke="#14b8a6" stroke-width="2" fill="none"/>
+                </svg>
+                PinPoint Ventures
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="learnings.html">Learnings</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="ideas.html">Ideas We Support</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Home</a>
+                <a href="team.html">Team</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="publications.html">Publications</a>
+                <a href="blog.html">Blog</a>
+                <a href="ideas.html">Ideas We Support</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Blog
+            </div>
+            <h1>Research Stories & Insights</h1>
+            <p>Reflections on methodology, field experiences, and the evolving practice of development research across South Asia.</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tabs">
+                <a href="#" class="filter-tab active" data-category="all">All Posts</a>
+                <a href="#" class="filter-tab" data-category="methodology">Methodology</a>
+                <a href="#" class="filter-tab" data-category="fieldwork">Fieldwork</a>
+                <a href="#" class="filter-tab" data-category="policy">Policy</a>
+                <a href="#" class="filter-tab" data-category="ethics">Ethics</a>
+                <a href="#" class="filter-tab" data-category="tools">Tools</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <!-- Featured Post -->
+            <article class="featured-post">
+                <div class="featured-content">
+                    <div class="featured-image">📊</div>
+                    <div class="featured-text">
+                        <span class="blog-category">Methodology</span>
+                        <h2>Beyond Extraction: Building Truly Participatory Research</h2>
+                        <p>After 18 years in development research, I've learned that the difference between extractive and empowering research isn't just about methods—it's about fundamentally rethinking who owns knowledge and how research relationships are built.</p>
+                        <a href="#" class="btn">Read Full Article →</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Blog Grid -->
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-card" data-category="fieldwork">
+                    <div class="blog-card-header">🌊</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Fieldwork</span>
+                            <span>March 15, 2024</span>
+                        </div>
+                        <h3>What Climate Migrants Taught Us About Urban Services</h3>
+                        <p class="blog-excerpt">When we started our photovoice project in Chittagong's informal settlements, we thought we were studying service access. What we discovered was an intricate ecosystem of community resilience that official maps completely missed.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">TH</div>
+                                <span>Tariq Hassan</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-card" data-category="methodology">
+                    <div class="blog-card-header">🔧</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Methodology</span>
+                            <span>March 8, 2024</span>
+                        </div>
+                        <h3>The Problem with Standard Consent Forms</h3>
+                        <p class="blog-excerpt">Working with adolescent girls in rural Jharkhand, we learned that one-size-fits-all ethical protocols can actually undermine both ethics and data quality. Here's how we redesigned consent as conversation.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">AP</div>
+                                <span>Asha Patel</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-card" data-category="policy">
+                    <div class="blog-card-header">📋</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Policy</span>
+                            <span>February 28, 2024</span>
+                        </div>
+                        <h3>When Good Policies Fail: Lessons from NREGA Implementation</h3>
+                        <p class="blog-excerpt">Our multi-state analysis of NREGA implementation reveals why well-designed policies often fail at the local level—and what this means for researchers studying social protection programs.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">RS</div>
+                                <span>Dr. Ravi Sharma</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 4 -->
+                <article class="blog-card" data-category="tools">
+                    <div class="blog-card-header">📱</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Tools</span>
+                            <span>February 20, 2024</span>
+                        </div>
+                        <h3>Mobile Data Collection During COVID: What We Learned</h3>
+                        <p class="blog-excerpt">Pandemic restrictions forced us to rapidly adapt our data collection methods. Six months later, we've learned that digital-first approaches can actually improve accessibility—when done thoughtfully.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">AK</div>
+                                <span>Arjun Khanna</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 5 -->
+                <article class="blog-card" data-category="ethics">
+                    <div class="blog-card-header">⚖️</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Ethics</span>
+                            <span>February 12, 2024</span>
+                        </div>
+                        <h3>Research Ethics in Conflict-Affected Areas</h3>
+                        <p class="blog-excerpt">Working in Northeast India taught us that standard ethical protocols often fall short in conflict settings. Community-led research offers a path forward, but requires rethinking fundamental assumptions about expertise.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">SK</div>
+                                <span>Sita Kumari</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 6 -->
+                <article class="blog-card" data-category="methodology">
+                    <div class="blog-card-header">🔍</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Methodology</span>
+                            <span>January 30, 2024</span>
+                        </div>
+                        <h3>Mixed Methods That Actually Mix</h3>
+                        <p class="blog-excerpt">True mixed methods integration requires more than running surveys and focus groups side by side. Our maternal health study in Assam shows how qualitative and quantitative data can truly inform each other.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">NF</div>
+                                <span>Nadira Fernando</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 7 -->
+                <article class="blog-card" data-category="fieldwork">
+                    <div class="blog-card-header">👥</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Fieldwork</span>
+                            <span>January 22, 2024</span>
+                        </div>
+                        <h3>When Communities Become Co-Researchers</h3>
+                        <p class="blog-excerpt">Training community members as researchers isn't just about building capacity—it fundamentally changes what we can learn and how we understand development challenges. Lessons from our self-help group study.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">AP</div>
+                                <span>Asha Patel</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Blog Post 8 -->
+                <article class="blog-card" data-category="policy">
+                    <div class="blog-card-header">💡</div>
+                    <div class="blog-card-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Policy</span>
+                            <span>January 15, 2024</span>
+                        </div>
+                        <h3>From Research to Policy: Bridging the Evidence Gap</h3>
+                        <p class="blog-excerpt">Even the best research fails if it doesn't reach policymakers in usable forms. Here's what we've learned about translating complex findings into actionable policy recommendations.</p>
+                        <div class="blog-card-footer">
+                            <a href="#" class="read-more">Read more →</a>
+                            <div class="blog-author">
+                                <div class="author-avatar">RS</div>
+                                <span>Dr. Ravi Sharma</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Get the latest insights on development research methodology, field experiences, and policy analysis delivered to your inbox monthly.</p>
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#disclaimer">Disclaimer</a>
+                <a href="#legal">Legal</a>
+            </div>
+            <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Update active tab
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter blog posts
+                const category = this.dataset.category;
+                const blogCards = document.querySelectorAll('.blog-card');
+                
+                blogCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Newsletter form
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Thank you for subscribing! You\'ll receive our monthly research insights.');
+                event.target.reset();
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (!event.target.closest('nav')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

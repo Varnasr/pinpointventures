@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research Learnings - PinPoint Ventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --soft-grey: #f8fafc;
+            --medium-grey: #e2e8f0;
+            --dark-grey: #475569;
+            --light-blue: #0ea5e9;
+            --violet: #8b5cf6;
+            --teal: #14b8a6;
+            --white: #ffffff;
+            --black: #1e293b;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,25 +28,29 @@
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #2d3748;
-            background: #f8fafc;
+            color: var(--text-primary);
+            background: var(--white);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
 
-        /* Header */
+        /* Header - Consistent with other pages */
         header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--medium-grey);
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -47,50 +66,116 @@
             gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #2d3748;
+            color: var(--black);
             text-decoration: none;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #4a5568;
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: #667eea;
+            color: var(--violet);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--violet);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--medium-grey);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--soft-grey);
         }
 
         /* Hero Section */
-        .page-hero {
-            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
-            color: white;
-            padding: 6rem 0 4rem;
+        .hero {
+            background: linear-gradient(135deg, var(--success) 0%, var(--teal) 100%);
+            color: var(--white);
+            padding: 8rem 0 4rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .page-hero h1 {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
-        .page-hero p {
-            font-size: 1.3rem;
+        .hero p {
+            font-size: 1.2rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto 2rem;
@@ -103,6 +188,7 @@
             border-radius: 25px;
             display: inline-block;
             font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         .breadcrumb a {
@@ -110,59 +196,64 @@
             text-decoration: none;
         }
 
-        .breadcrumb a:hover {
-            color: white;
-        }
-
         /* Main Content */
         .main-content {
-            padding: 4rem 0;
-            background: white;
+            padding: 5rem 0;
+            background: var(--white);
         }
 
-        .content-intro {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .content-intro h2 {
-            font-size: 2rem;
+        .section-title {
+            font-size: 2.5rem;
             font-weight: 700;
+            text-align: center;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
-        .content-intro p {
-            font-size: 1.1rem;
-            color: #4a5568;
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.7;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
         }
 
         /* Learning Framework */
         .learning-framework {
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-            padding: 4rem 0;
+            background: var(--soft-grey);
+            padding: 5rem 0;
+            border-radius: 20px;
             margin: 3rem 0;
-            border-radius: 12px;
+        }
+
+        .framework-diagram {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .framework-svg {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 2rem auto;
         }
 
         .framework-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .framework-pillar {
             text-align: center;
             padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            border-top: 4px solid #38b2ac;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--medium-grey);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
@@ -170,38 +261,33 @@
         .framework-pillar::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(56, 178, 172, 0.03) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--success), var(--teal), var(--light-blue));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
         .framework-pillar:hover::before {
-            opacity: 1;
+            transform: scaleX(1);
         }
 
-        .framework-pillar:nth-child(2) { border-top-color: #667eea; }
-        .framework-pillar:nth-child(3) { border-top-color: #764ba2; }
-        .framework-pillar:nth-child(4) { border-top-color: #81e6d9; }
-
         .framework-pillar:hover {
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-6px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-            border-top-width: 6px;
         }
 
         .framework-pillar h3 {
             font-size: 1.2rem;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .framework-pillar p {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
         }
@@ -215,12 +301,11 @@
         }
 
         .learning-section {
-            background: white;
+            background: var(--soft-grey);
             border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--medium-grey);
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -231,9 +316,9 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #38b2ac, #667eea, #764ba2, #81e6d9);
+            background: linear-gradient(90deg, var(--success), var(--teal), var(--light-blue), var(--violet));
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .learning-section:hover::before {
@@ -241,36 +326,37 @@
         }
 
         .learning-section:hover {
-            transform: translateY(-6px) scale(1.01);
+            transform: translateY(-6px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            background: var(--white);
         }
 
         .learning-header {
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            background: linear-gradient(135deg, var(--success) 0%, var(--teal) 100%);
+            color: var(--white);
             padding: 2rem;
-            border-bottom: 1px solid #e2e8f0;
         }
 
         .learning-number {
             display: inline-block;
-            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
-            color: white;
-            width: 40px;
-            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
 
         .learning-section h3 {
             font-size: 1.6rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: #1a202c;
         }
 
         .learning-body {
@@ -278,24 +364,24 @@
         }
 
         .learning-story {
-            background: #f8fafc;
+            background: var(--white);
             padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid #38b2ac;
+            border-radius: 12px;
+            border-left: 4px solid var(--success);
             margin-bottom: 2rem;
         }
 
         .learning-story h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: #38b2ac;
+            color: var(--success);
             margin-bottom: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .learning-story p {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-style: italic;
             line-height: 1.7;
             margin: 0;
@@ -309,7 +395,7 @@
             font-size: 1.1rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .principles-list {
@@ -318,7 +404,7 @@
         }
 
         .principles-list li {
-            color: #4a5568;
+            color: var(--text-secondary);
             margin-bottom: 1rem;
             padding-left: 2rem;
             position: relative;
@@ -327,7 +413,7 @@
 
         .principles-list li::before {
             content: "✓";
-            color: #38b2ac;
+            color: var(--success);
             position: absolute;
             left: 0;
             font-weight: 700;
@@ -335,21 +421,23 @@
         }
 
         .learning-application {
-            background: #fff5f5;
-            border: 1px solid #fed7d7;
-            border-radius: 8px;
+            background: linear-gradient(135deg, var(--soft-grey), var(--medium-grey));
+            border: 1px solid var(--medium-grey);
+            border-radius: 12px;
             padding: 1.5rem;
         }
 
         .learning-application h4 {
             font-size: 1rem;
             font-weight: 600;
-            color: #c53030;
+            color: var(--violet);
             margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .learning-application p {
-            color: #744210;
+            color: var(--text-primary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin: 0;
@@ -357,11 +445,11 @@
 
         /* Methodology Spotlight */
         .methodology-spotlight {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--violet) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 5rem 0;
             margin: 4rem 0;
-            border-radius: 12px;
+            border-radius: 20px;
         }
 
         .spotlight-content {
@@ -393,8 +481,9 @@
         .spotlight-feature {
             background: rgba(255, 255, 255, 0.1);
             padding: 1.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .spotlight-feature h4 {
@@ -411,61 +500,65 @@
 
         /* Related Content */
         .related-content {
-            background: #f8fafc;
-            padding: 4rem 0;
+            background: var(--soft-grey);
+            padding: 5rem 0;
         }
 
         .related-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .related-card {
-            background: white;
+            background: var(--white);
             padding: 2rem;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
+            border-radius: 16px;
+            border-left: 4px solid var(--success);
             transition: all 0.3s ease;
+            border: 1px solid var(--medium-grey);
         }
 
+        .related-card:nth-child(2) { border-left-color: var(--violet); }
+        .related-card:nth-child(3) { border-left-color: var(--light-blue); }
+
         .related-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
         .related-card h4 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .related-card p {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
         }
 
-        .related-card a {
-            color: #667eea;
+        .related-link {
+            color: var(--success);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        .related-card a:hover {
-            text-decoration: underline;
+        .related-link:hover {
+            color: var(--violet);
         }
 
         /* Footer */
         footer {
-            background: #1a202c;
-            color: #8b949e;
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem 0;
             text-align: center;
-            padding: 3rem 0;
         }
 
         .footer-links {
@@ -476,13 +569,14 @@
         }
 
         .footer-links a {
-            color: #8b949e;
+            color: var(--white);
             text-decoration: none;
-            transition: color 0.3s ease;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #58a6ff;
+            opacity: 1;
         }
 
         /* Responsive */
@@ -491,12 +585,28 @@
                 display: none;
             }
 
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
             .framework-grid {
                 grid-template-columns: 1fr;
             }
 
             .spotlight-features {
                 grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .spotlight-content h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -509,35 +619,45 @@
                 <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea"/>
-                            <stop offset="50%" style="stop-color:#764ba2"/>
-                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="50%" style="stop-color:#0ea5e9"/>
+                            <stop offset="100%" style="stop-color:#14b8a6"/>
                         </linearGradient>
                     </defs>
-                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
-                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2"/>
-                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
-                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
-                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
-                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="45" fill="url(#logoGrad)" opacity="0.1"/>
+                    <path d="M30 35 L50 25 L70 35 L70 55 L50 75 L30 55 Z" fill="url(#logoGrad)" stroke="#334155" stroke-width="2"/>
+                    <circle cx="50" cy="45" r="8" fill="white" stroke="#334155" stroke-width="2"/>
+                    <path d="M35 25 Q40 20 45 25" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                    <path d="M55 25 Q60 20 65 25" stroke="#14b8a6" stroke-width="2" fill="none"/>
                 </svg>
                 PinPoint Ventures
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#research">Research</a></li>
+                <li><a href="team.html">Team</a></li>
                 <li><a href="insights.html">Insights</a></li>
                 <li><a href="learnings.html" class="active">Learnings</a></li>
-                <li><a href="team.html">Team</a></li>
                 <li><a href="publications.html">Publications</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="ideas.html">Ideas We Support</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Home</a>
+                <a href="team.html">Team</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="publications.html">Publications</a>
+                <a href="blog.html">Blog</a>
+                <a href="ideas.html">Ideas We Support</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="page-hero">
+    <section class="hero">
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.html">Home</a> / Research Learnings
@@ -550,15 +670,50 @@
     <!-- Main Content -->
     <section class="main-content">
         <div class="container">
-            <div class="content-intro">
-                <h2>Principles for Context-Sensitive Research</h2>
-                <p>These learnings emerge from both successes and failures in our work. They represent our evolving understanding of how to conduct research that is both methodologically rigorous and ethically grounded in community needs.</p>
-            </div>
+            <h2 class="section-title">Principles for Context-Sensitive Research</h2>
+            <p class="section-subtitle">These learnings emerge from both successes and failures in our work. They represent our evolving understanding of how to conduct research that is both methodologically rigorous and ethically grounded in community needs.</p>
 
             <!-- Learning Framework -->
             <div class="learning-framework">
-                <h3 style="text-align: center; font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;">Our Research Framework</h3>
-                <p style="text-align: center; color: #4a5568; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7;">Four foundational pillars that inform every research project we undertake.</p>
+                <div class="framework-diagram">
+                    <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: var(--black);">Our Research Framework</h3>
+                    <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem; line-height: 1.7;">Four foundational pillars that inform every research project we undertake.</p>
+                    <svg class="framework-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central framework -->
+                        <rect x="250" y="150" width="100" height="100" fill="#10b981" opacity="0.9" rx="15"/>
+                        <text x="300" y="190" text-anchor="middle" fill="white" font-size="14" font-weight="700">Community</text>
+                        <text x="300" y="210" text-anchor="middle" fill="white" font-size="14" font-weight="700">Centered</text>
+                        
+                        <!-- Four pillars -->
+                        <rect x="100" y="50" width="80" height="80" fill="#14b8a6" opacity="0.8" rx="12"/>
+                        <text x="140" y="85" text-anchor="middle" fill="white" font-size="12" font-weight="600">Listen</text>
+                        <text x="140" y="100" text-anchor="middle" fill="white" font-size="12" font-weight="600">First</text>
+                        
+                        <rect x="420" y="50" width="80" height="80" fill="#0ea5e9" opacity="0.8" rx="12"/>
+                        <text x="460" y="85" text-anchor="middle" fill="white" font-size="12" font-weight="600">Adapt</text>
+                        <text x="460" y="100" text-anchor="middle" fill="white" font-size="12" font-weight="600">Methods</text>
+                        
+                        <rect x="100" y="270" width="80" height="80" fill="#8b5cf6" opacity="0.8" rx="12"/>
+                        <text x="140" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="600">Share</text>
+                        <text x="140" y="320" text-anchor="middle" fill="white" font-size="12" font-weight="600">Power</text>
+                        
+                        <rect x="420" y="270" width="80" height="80" fill="#f59e0b" opacity="0.8" rx="12"/>
+                        <text x="460" y="305" text-anchor="middle" fill="white" font-size="12" font-weight="600">Act on</text>
+                        <text x="460" y="320" text-anchor="middle" fill="white" font-size="12" font-weight="600">Findings</text>
+                        
+                        <!-- Connecting lines -->
+                        <path d="M180 90 Q215 120 250 160" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="6,4"/>
+                        <path d="M420 90 Q385 120 350 160" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="6,4"/>
+                        <path d="M180 310 Q215 280 250 240" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="6,4"/>
+                        <path d="M420 310 Q385 280 350 240" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="6,4"/>
+                        
+                        <!-- Hand-drawn annotations -->
+                        <text x="30" y="40" font-family="Caveat" font-size="14" font-weight="600" fill="#64748b">Community priorities</text>
+                        <text x="480" y="40" font-family="Caveat" font-size="14" font-weight="600" fill="#64748b">Cultural context</text>
+                        <text x="30" y="370" font-family="Caveat" font-size="14" font-weight="600" fill="#64748b">Inclusive process</text>
+                        <text x="480" y="370" font-family="Caveat" font-size="14" font-weight="600" fill="#64748b">Real change</text>
+                    </svg>
+                </div>
                 <div class="framework-grid">
                     <div class="framework-pillar">
                         <h3>Listen First</h3>
@@ -771,17 +926,17 @@
                 <div class="related-card">
                     <h4>Field Insights</h4>
                     <p>See how these learnings play out in specific research contexts through detailed stories from our recent projects.</p>
-                    <a href="insights.html">Read field insights →</a>
+                    <a href="insights.html" class="related-link">Read field insights →</a>
                 </div>
                 <div class="related-card">
                     <h4>Research Portfolio</h4>
                     <p>Explore examples of our research across different sectors and regions, showcasing applied methodological approaches.</p>
-                    <a href="index.html#research">View our research →</a>
+                    <a href="index.html#research" class="related-link">View our research →</a>
                 </div>
                 <div class="related-card">
                     <h4>Collaborate</h4>
                     <p>Interested in applying these approaches to your research questions? Let's discuss how we can support your work.</p>
-                    <a href="index.html#contact">Start a conversation →</a>
+                    <a href="index.html#contact" class="related-link">Start a conversation →</a>
                 </div>
             </div>
         </div>
@@ -791,17 +946,51 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#services">Services</a>
-                <a href="index.html#research">Research</a>
-                <a href="insights.html">Insights</a>
-                <a href="learnings.html">Learnings</a>
-                <a href="team.html">Team</a>
-                <a href="publications.html">Publications</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#disclaimer">Disclaimer</a>
+                <a href="#legal">Legal</a>
             </div>
             <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (!event.target.closest('nav')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.learning-section, .framework-pillar, .related-card, .spotlight-feature').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>

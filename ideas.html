@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideas We Support - PinPoint Ventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-grey: #f8fafc;
+            --medium-grey: #e2e8f0;
+            --dark-grey: #475569;
+            --light-blue: #0ea5e9;
+            --violet: #8b5cf6;
+            --teal: #14b8a6;
+            --white: #ffffff;
+            --black: #1e293b;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header - Same as other pages */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--medium-grey);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--violet);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--violet);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--medium-grey);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--soft-grey);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--success) 0%, var(--teal) 100%);
+            color: var(--white);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        /* Values Diagram */
+        .values-diagram {
+            background: var(--soft-grey);
+            padding: 4rem 0;
+        }
+
+        .diagram-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .values-svg {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 2rem auto;
+        }
+
+        /* Core Ideas Section */
+        .core-ideas {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .idea-card {
+            background: var(--soft-grey);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--medium-grey);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .idea-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--success), var(--teal), var(--light-blue));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .idea-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .idea-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+        }
+
+        .idea-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--success), var(--teal));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .idea-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .idea-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Organizations Section */
+        .organizations {
+            padding: 5rem 0;
+            background: var(--soft-grey);
+        }
+
+        .orgs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .org-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            border-left: 4px solid var(--success);
+            transition: all 0.3s ease;
+        }
+
+        .org-card:nth-child(2) { border-left-color: var(--teal); }
+        .org-card:nth-child(3) { border-left-color: var(--light-blue); }
+        .org-card:nth-child(4) { border-left-color: var(--violet); }
+        .org-card:nth-child(5) { border-left-color: var(--warning); }
+        .org-card:nth-child(6) { border-left-color: var(--success); }
+
+        .org-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .org-card h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+        }
+
+        .org-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .org-link {
+            color: var(--success);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .org-link:hover {
+            color: var(--teal);
+        }
+
+        /* Initiatives Section */
+        .initiatives {
+            padding: 5rem 0;
+            background: var(--white);
+        }
+
+        .initiatives-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .initiative-item {
+            background: var(--soft-grey);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-top: 3px solid var(--teal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .initiative-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.05) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .initiative-item:hover::before {
+            opacity: 1;
+        }
+
+        .initiative-item:nth-child(2) { border-top-color: var(--success); }
+        .initiative-item:nth-child(3) { border-top-color: var(--light-blue); }
+        .initiative-item:nth-child(4) { border-top-color: var(--violet); }
+
+        .initiative-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            background: var(--white);
+        }
+
+        .initiative-item h4 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--black);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .initiative-emoji {
+            font-size: 1.5rem;
+        }
+
+        .initiative-item p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .initiative-quote {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--teal);
+            font-style: italic;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Call to Action */
+        .cta {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-grey) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--success), var(--teal));
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .ideas-grid,
+            .orgs-grid,
+            .initiatives-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="50%" style="stop-color:#0ea5e9"/>
+                            <stop offset="100%" style="stop-color:#14b8a6"/>
+                        </linearGradient>
+                    </defs>
+                    <circle cx="50" cy="50" r="45" fill="url(#logoGrad)" opacity="0.1"/>
+                    <path d="M30 35 L50 25 L70 35 L70 55 L50 75 L30 55 Z" fill="url(#logoGrad)" stroke="#334155" stroke-width="2"/>
+                    <circle cx="50" cy="45" r="8" fill="white" stroke="#334155" stroke-width="2"/>
+                    <path d="M35 25 Q40 20 45 25" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                    <path d="M55 25 Q60 20 65 25" stroke="#14b8a6" stroke-width="2" fill="none"/>
+                </svg>
+                PinPoint Ventures
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="learnings.html">Learnings</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="ideas.html" class="active">Ideas We Support</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Home</a>
+                <a href="team.html">Team</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="publications.html">Publications</a>
+                <a href="blog.html">Blog</a>
+                <a href="ideas.html">Ideas We Support</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a> / Ideas We Support
+                </div>
+                <h1>Ideas We Champion</h1>
+                <p>The movements, initiatives, and approaches we believe can transform development research and create more equitable outcomes across South Asia and beyond.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Diagram -->
+    <section class="values-diagram">
+        <div class="container">
+            <div class="diagram-container">
+                <h2 class="section-title">Our Vision for Change</h2>
+                <p class="section-subtitle">The interconnected principles that guide our support for transformative development initiatives</p>
+                <svg class="values-svg" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Central hub -->
+                    <circle cx="300" cy="200" r="70" fill="#10b981" opacity="0.9"/>
+                    <text x="300" y="190" text-anchor="middle" fill="white" font-size="16" font-weight="700">Community</text>
+                    <text x="300" y="210" text-anchor="middle" fill="white" font-size="16" font-weight="700">Ownership</text>
+                    
+                    <!-- Surrounding values -->
+                    <circle cx="150" cy="100" r="50" fill="#14b8a6" opacity="0.8"/>
+                    <text x="150" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="600">Open</text>
+                    <text x="150" y="110" text-anchor="middle" fill="white" font-size="13" font-weight="600">Knowledge</text>
+                    
+                    <circle cx="450" cy="100" r="50" fill="#0ea5e9" opacity="0.8"/>
+                    <text x="450" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="600">Justice</text>
+                    <text x="450" y="110" text-anchor="middle" fill="white" font-size="13" font-weight="600">Focused</text>
+                    
+                    <circle cx="150" cy="300" r="50" fill="#8b5cf6" opacity="0.8"/>
+                    <text x="150" y="295" text-anchor="middle" fill="white" font-size="13" font-weight="600">Locally</text>
+                    <text x="150" y="310" text-anchor="middle" fill="white" font-size="13" font-weight="600">Led</text>
+                    
+                    <circle cx="450" cy="300" r="50" fill="#f59e0b" opacity="0.8"/>
+                    <text x="450" y="295" text-anchor="middle" fill="white" font-size="13" font-weight="600">Systems</text>
+                    <text x="450" y="310" text-anchor="middle" fill="white" font-size="13" font-weight="600">Change</text>
+                    
+                    <!-- Connecting lines with handdrawn style -->
+                    <path d="M230 200 Q190 150 180 130" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+                    <path d="M370 200 Q410 150 420 130" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+                    <path d="M230 200 Q190 250 180 270" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+                    <path d="M370 200 Q410 250 420 270" stroke="#64748b" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+                    
+                    <!-- Decorative elements -->
+                    <path d="M50 50 Q60 40 70 50 Q80 55 75 65" stroke="#10b981" stroke-width="3" fill="none" opacity="0.6"/>
+                    <text x="30" y="40" font-size="14" fill="#64748b" font-family="Caveat" font-weight="600">Together</text>
+                    
+                    <path d="M530 50 Q520 40 510 50 Q500 55 505 65" stroke="#14b8a6" stroke-width="3" fill="none" opacity="0.6"/>
+                    <text x="500" y="40" font-size="14" fill="#64748b" font-family="Caveat" font-weight="600">Inclusive</text>
+                    
+                    <path d="M50 350 Q60 340 70 350 Q80 355 75 365" stroke="#8b5cf6" stroke-width="3" fill="none" opacity="0.6"/>
+                    <text x="25" y="335" font-size="14" fill="#64748b" font-family="Caveat" font-weight="600">Sustainable</text>
+                    
+                    <path d="M530 350 Q520 340 510 350 Q500 355 505 365" stroke="#f59e0b" stroke-width="3" fill="none" opacity="0.6"/>
+                    <text x="510" y="335" font-size="14" fill="#64748b" font-family="Caveat" font-weight="600">Impactful</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Ideas -->
+    <section class="core-ideas">
+        <div class="container">
+            <h2 class="section-title">Core Ideas We Champion</h2>
+            <p class="section-subtitle">Foundational principles that should guide all development research and intervention</p>
+            
+            <div class="ideas-grid">
+                <div class="idea-card">
+                    <div class="idea-icon">🗣️</div>
+                    <h3>Participatory Research as Standard Practice</h3>
+                    <p>Research should be conducted with communities, not on them. Every study should include meaningful community involvement in question design, data collection, analysis, and action planning.</p>
+                </div>
+                
+                <div class="idea-card">
+                    <div class="idea-icon">📖</div>
+                    <h3>Open Access to Knowledge</h3>
+                    <p>Research funded by public resources should be freely accessible to the communities it affects. Knowledge barriers perpetuate inequality and limit the potential for evidence-based change.</p>
+                </div>
+                
+                <div class="idea-card">
+                    <div class="idea-icon">⚖️</div>
+                    <h3>Decolonizing Development Research</h3>
+                    <p>Moving beyond extractive research models that extract insights from the Global South for Northern consumption. Research should be led by local experts and serve local priorities.</p>
+                </div>
+                
+                <div class="idea-card">
+                    <div class="idea-icon">🌍</div>
+                    <h3>Climate Justice as Development Priority</h3>
+                    <p>All development programming must center climate resilience and environmental justice. The communities least responsible for climate change should not bear its greatest costs.</p>
+                </div>
+                
+                <div class="idea-card">
+                    <div class="idea-icon">👥</div>
+                    <h3>Intersectional Approaches to Inclusion</h3>
+                    <p>Understanding how gender, caste, class, ethnicity, disability, and other identities intersect to create unique experiences of marginalization and empowerment.</p>
+                </div>
+                
+                <div class="idea-card">
+                    <div class="idea-icon">🔄</div>
+                    <h3>Systems Thinking in Program Design</h3>
+                    <p>Moving beyond linear program models to understand complex systems, feedback loops, and unintended consequences. Change happens through relationships, not just interventions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organizations We Support -->
+    <section class="organizations">
+        <div class="container">
+            <h2 class="section-title">Organizations We Champion</h2>
+            <p class="section-subtitle">Groups and networks doing transformative work in development research and practice</p>
+            
+            <div class="orgs-grid">
+                <div class="org-card">
+                    <h4>🌱 Participatory Research in Asia (PRIA)</h4>
+                    <p>Network advancing community-based participatory research across Asia, building local capacity for knowledge creation and social action.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+                
+                <div class="org-card">
+                    <h4>📊 Open Government Partnership</h4>
+                    <p>Global initiative promoting transparency, accountability, and citizen participation in governance through open data and participatory democracy.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+                
+                <div class="org-card">
+                    <h4>🏛️ Centre for Budget and Governance Accountability</h4>
+                    <p>Indian organization promoting transparent and accountable governance through budget analysis, policy research, and citizen empowerment.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+                
+                <div class="org-card">
+                    <h4>🌊 International Centre for Climate Change and Development</h4>
+                    <p>Bangladesh-based research center focusing on climate adaptation, disaster risk reduction, and environmental governance in South Asia.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+                
+                <div class="org-card">
+                    <h4>👩 Self Employed Women's Association (SEWA)</h4>
+                    <p>Grassroots organization of poor, self-employed women workers, demonstrating how research and organizing can drive economic empowerment.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+                
+                <div class="org-card">
+                    <h4>🎓 Society for Participatory Research in Asia</h4>
+                    <p>Network promoting participatory research methodologies, capacity building, and knowledge sharing across Asian contexts.</p>
+                    <a href="#" class="org-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives & Movements -->
+    <section class="initiatives">
+        <div class="container">
+            <h2 class="section-title">Movements & Initiatives We Support</h2>
+            <p class="section-subtitle">Specific campaigns and movements working toward more equitable development outcomes</p>
+            
+            <div class="initiatives-list">
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">📚</span>Open Access Movement</h4>
+                    <p>Making research freely available to all, breaking down paywalls that prevent communities from accessing knowledge about their own contexts and challenges.</p>
+                    <div class="initiative-quote">"Knowledge belongs to humanity, not to corporations. Every community should have access to research that affects their lives."</div>
+                </div>
+                
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">🏞️</span>Indigenous Data Sovereignty</h4>
+                    <p>Supporting indigenous and marginalized communities' rights to control data collection, ownership, and use within their territories and among their peoples.</p>
+                    <div class="initiative-quote">"Communities should own and control data about themselves, especially given the long history of extractive research practices."</div>
+                </div>
+                
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">🌱</span>Feminist Research Approaches</h4>
+                    <p>Methodologies that center women's experiences, challenge patriarchal knowledge systems, and recognize care work and emotional labor in development processes.</p>
+                    <div class="initiative-quote">"Research methods themselves can be tools of liberation or oppression. We choose approaches that amplify marginalized voices."</div>
+                </div>
+                
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">🔄</span>Regenerative Development</h4>
+                    <p>Moving beyond 'sustainable' to 'regenerative' approaches that heal ecosystems and communities while meeting human needs through restorative practices.</p>
+                    <div class="initiative-quote">"True development should leave communities and ecosystems stronger than before, not just 'less damaged.'"</div>
+                </div>
+                
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">🤖</span>Ethical AI in Development</h4>
+                    <p>Ensuring artificial intelligence and algorithmic systems in development are transparent, accountable, and designed with community input and oversight.</p>
+                    <div class="initiative-quote">"AI systems that affect people's lives must be understandable and controllable by the communities they serve."</div>
+                </div>
+                
+                <div class="initiative-item">
+                    <h4><span class="initiative-emoji">⚖️</span>Research Justice Movement</h4>
+                    <p>Challenging academic institutions and funding mechanisms that perpetuate extractive research while building community-controlled research infrastructure.</p>
+                    <div class="initiative-quote">"Research justice means communities define their own research priorities and control how knowledge about them is created and used."</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>Join the Movement</h2>
+            <p>If you're working on initiatives that align with these values, we'd love to connect, collaborate, and support each other's work toward more equitable development outcomes.</p>
+            <a href="index.html#contact" class="btn">Start a Conversation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#disclaimer">Disclaimer</a>
+                <a href="#legal">Legal</a>
+            </div>
+            <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (!event.target.closest('nav')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.idea-card, .org-card, .initiative-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications & Resources - PinPoint Ventures</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --soft-grey: #f8fafc;
+            --medium-grey: #e2e8f0;
+            --dark-grey: #475569;
+            --light-blue: #0ea5e9;
+            --violet: #8b5cf6;
+            --teal: #14b8a6;
+            --white: #ffffff;
+            --black: #1e293b;
+            --text-primary: #334155;
+            --text-secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,25 +28,29 @@
         }
 
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
-            color: #2d3748;
-            background: #f8fafc;
+            color: var(--text-primary);
+            background: var(--white);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 1rem;
         }
 
-        /* Header */
+        /* Header - Consistent with other pages */
         header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--medium-grey);
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -47,50 +66,116 @@
             gap: 0.75rem;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #2d3748;
+            color: var(--black);
             text-decoration: none;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2.5rem;
+            gap: 2rem;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #4a5568;
+            color: var(--text-primary);
             font-weight: 500;
             font-size: 0.95rem;
             transition: color 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            color: #667eea;
+            color: var(--violet);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--violet);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--medium-grey);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--soft-grey);
         }
 
         /* Hero Section */
-        .page-hero {
-            background: linear-gradient(135deg, #81e6d9 0%, #38b2ac 100%);
-            color: white;
-            padding: 6rem 0 4rem;
+        .hero {
+            background: linear-gradient(135deg, var(--warning) 0%, var(--light-blue) 100%);
+            color: var(--white);
+            padding: 8rem 0 4rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .page-hero h1 {
-            font-size: clamp(2.5rem, 4vw, 3.5rem);
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             font-weight: 800;
             margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
-        .page-hero p {
-            font-size: 1.3rem;
+        .hero p {
+            font-size: 1.2rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto 2rem;
@@ -103,6 +188,7 @@
             border-radius: 25px;
             display: inline-block;
             font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         .breadcrumb a {
@@ -110,85 +196,66 @@
             text-decoration: none;
         }
 
-        .breadcrumb a:hover {
-            color: white;
-        }
-
         /* Content Navigation */
         .content-nav {
-            background: white;
+            background: var(--white);
             padding: 2rem 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--medium-grey);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
         }
 
         .nav-tabs {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
         .nav-tab {
-            padding: 1rem 1.8rem;
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            background: var(--soft-grey);
+            border: 2px solid var(--medium-grey);
+            border-radius: 25px;
+            color: var(--text-primary);
             text-decoration: none;
-            color: #4a5568;
             font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-tab::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        .nav-tab:hover::before,
-        .nav-tab.active::before {
-            left: 0;
         }
 
         .nav-tab:hover,
         .nav-tab.active {
-            color: white;
-            border-color: transparent;
+            background: var(--violet);
+            color: var(--white);
+            border-color: var(--violet);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
         }
 
         /* Publications Section */
         .publications {
-            padding: 4rem 0;
-            background: white;
+            padding: 5rem 0;
+            background: var(--white);
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            text-align: center;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .section-subtitle {
+            font-size: 1.2rem;
             text-align: center;
-            font-size: 1.1rem;
-            color: #4a5568;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
         }
 
         .publications-grid {
@@ -199,11 +266,11 @@
         }
 
         .publication-card {
-            background: #f8fafc;
+            background: var(--soft-grey);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid #e2e8f0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--medium-grey);
+            transition: all 0.3s ease;
             position: relative;
         }
 
@@ -214,9 +281,9 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #38b2ac, #667eea, #764ba2, #81e6d9);
+            background: linear-gradient(90deg, var(--warning), var(--light-blue), var(--violet), var(--teal));
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .publication-card:hover::before {
@@ -224,31 +291,33 @@
         }
 
         .publication-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            background: var(--white);
         }
 
         .publication-header {
             padding: 2rem 2rem 1rem;
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            background: linear-gradient(135deg, var(--warning) 0%, var(--light-blue) 100%);
+            color: var(--white);
         }
 
         .publication-type {
             display: inline-block;
-            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
-            color: white;
+            background: rgba(255, 255, 255, 0.2);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .publication-card h3 {
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 0.8rem;
-            color: #1a202c;
             line-height: 1.4;
         }
 
@@ -256,17 +325,17 @@
             display: flex;
             gap: 1rem;
             font-size: 0.9rem;
-            color: #4a5568;
+            opacity: 0.9;
             margin-bottom: 1rem;
             flex-wrap: wrap;
         }
 
         .publication-body {
-            padding: 1.5rem 2rem;
+            padding: 2rem;
         }
 
         .publication-abstract {
-            color: #4a5568;
+            color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
@@ -279,11 +348,12 @@
         }
 
         .tag {
-            background: #e2e8f0;
-            color: #4a5568;
+            background: var(--white);
+            color: var(--text-secondary);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
+            border: 1px solid var(--medium-grey);
         }
 
         .publication-links {
@@ -294,52 +364,35 @@
 
         .pub-link {
             padding: 0.8rem 1.5rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--violet) 0%, var(--light-blue) 100%);
+            color: var(--white);
             text-decoration: none;
             border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pub-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .pub-link:hover::before {
-            left: 100%;
+            transition: all 0.3s ease;
         }
 
         .pub-link:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
         }
 
         .pub-link.secondary {
             background: transparent;
-            color: #667eea;
-            border: 1px solid #667eea;
+            color: var(--violet);
+            border: 1px solid var(--violet);
         }
 
         .pub-link.secondary:hover {
-            background: #667eea;
-            color: white;
+            background: var(--violet);
+            color: var(--white);
         }
 
         /* Resources Section */
         .resources {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            padding: 5rem 0;
+            background: var(--soft-grey);
         }
 
         .resources-grid {
@@ -350,12 +403,12 @@
         }
 
         .resource-card {
-            background: white;
+            background: var(--white);
             padding: 2.5rem;
             border-radius: 20px;
-            border-left: 4px solid #38b2ac;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--teal);
+            transition: all 0.3s ease;
+            border: 1px solid var(--medium-grey);
             position: relative;
             overflow: hidden;
         }
@@ -367,20 +420,20 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(56, 178, 172, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.03) 0%, transparent 70%);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.3s ease;
         }
 
         .resource-card:hover::before {
             opacity: 1;
         }
 
-        .resource-card:nth-child(2n) { border-left-color: #667eea; }
-        .resource-card:nth-child(3n) { border-left-color: #764ba2; }
+        .resource-card:nth-child(2n) { border-left-color: var(--violet); }
+        .resource-card:nth-child(3n) { border-left-color: var(--light-blue); }
 
         .resource-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
             border-left-width: 6px;
         }
@@ -388,7 +441,7 @@
         .resource-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            background: linear-gradient(135deg, var(--teal) 0%, var(--light-blue) 100%);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -399,32 +452,32 @@
 
         .resource-card h3 {
             font-size: 1.3rem;
-            font-weight: 700;
+            font-weight: 600;
             margin-bottom: 1rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .resource-card p {
-            color: #4a5568;
+            color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
 
         .resource-link {
-            color: #38b2ac;
+            color: var(--teal);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
         }
 
         .resource-link:hover {
-            text-decoration: underline;
+            color: var(--violet);
         }
 
         /* Policy Briefs Section */
         .policy-briefs {
-            padding: 4rem 0;
-            background: white;
+            padding: 5rem 0;
+            background: var(--white);
         }
 
         .briefs-grid {
@@ -435,44 +488,46 @@
         }
 
         .brief-card {
-            background: #f8fafc;
+            background: var(--soft-grey);
             padding: 2rem;
-            border-radius: 8px;
-            border-top: 3px solid #667eea;
+            border-radius: 16px;
+            border-top: 3px solid var(--violet);
             transition: all 0.3s ease;
+            border: 1px solid var(--medium-grey);
         }
 
-        .brief-card:nth-child(2n) { border-top-color: #764ba2; }
-        .brief-card:nth-child(3n) { border-top-color: #38b2ac; }
+        .brief-card:nth-child(2n) { border-top-color: var(--teal); }
+        .brief-card:nth-child(3n) { border-top-color: var(--light-blue); }
 
         .brief-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            background: var(--white);
         }
 
         .brief-number {
             display: inline-block;
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
+            background: var(--violet);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             text-align: center;
-            line-height: 30px;
+            line-height: 40px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 1rem;
             margin-bottom: 1rem;
         }
 
         .brief-card h4 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.8rem;
-            color: #1a202c;
+            color: var(--black);
         }
 
         .brief-card p {
-            color: #4a5568;
+            color: var(--text-secondary);
             font-size: 0.95rem;
             line-height: 1.6;
             margin-bottom: 1rem;
@@ -480,15 +535,15 @@
 
         .brief-date {
             font-size: 0.85rem;
-            color: #667eea;
+            color: var(--violet);
             font-weight: 500;
         }
 
         /* Newsletter Section */
         .newsletter {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-            color: white;
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-grey) 100%);
+            color: var(--white);
             text-align: center;
         }
 
@@ -517,16 +572,17 @@
             flex: 1;
             padding: 1rem;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-family: inherit;
+            font-size: 1rem;
         }
 
         .newsletter-btn {
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--violet), var(--teal));
+            color: var(--white);
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -534,15 +590,15 @@
 
         .newsletter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(56, 178, 172, 0.3);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
         }
 
         /* Footer */
         footer {
-            background: #0d1117;
-            color: #8b949e;
+            background: var(--black);
+            color: var(--white);
+            padding: 2rem 0;
             text-align: center;
-            padding: 3rem 0;
         }
 
         .footer-links {
@@ -553,13 +609,14 @@
         }
 
         .footer-links a {
-            color: #8b949e;
+            color: var(--white);
             text-decoration: none;
-            transition: color 0.3s ease;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #58a6ff;
+            opacity: 1;
         }
 
         /* Responsive */
@@ -568,12 +625,34 @@
                 display: none;
             }
 
-            .publications-grid {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 6rem 0 3rem;
+            }
+
+            .publications-grid,
+            .resources-grid {
                 grid-template-columns: 1fr;
             }
 
             .newsletter-form {
                 flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-tabs {
+                gap: 0.5rem;
+            }
+
+            .nav-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -586,35 +665,45 @@
                 <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#667eea"/>
-                            <stop offset="50%" style="stop-color:#764ba2"/>
-                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                            <stop offset="0%" style="stop-color:#8b5cf6"/>
+                            <stop offset="50%" style="stop-color:#0ea5e9"/>
+                            <stop offset="100%" style="stop-color:#14b8a6"/>
                         </linearGradient>
                     </defs>
-                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
-                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2"/>
-                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
-                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
-                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
-                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <circle cx="50" cy="50" r="45" fill="url(#logoGrad)" opacity="0.1"/>
+                    <path d="M30 35 L50 25 L70 35 L70 55 L50 75 L30 55 Z" fill="url(#logoGrad)" stroke="#334155" stroke-width="2"/>
+                    <circle cx="50" cy="45" r="8" fill="white" stroke="#334155" stroke-width="2"/>
+                    <path d="M35 25 Q40 20 45 25" stroke="#8b5cf6" stroke-width="2" fill="none"/>
+                    <path d="M55 25 Q60 20 65 25" stroke="#14b8a6" stroke-width="2" fill="none"/>
                 </svg>
                 PinPoint Ventures
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#services">Services</a></li>
-                <li><a href="index.html#research">Research</a></li>
+                <li><a href="team.html">Team</a></li>
                 <li><a href="insights.html">Insights</a></li>
                 <li><a href="learnings.html">Learnings</a></li>
-                <li><a href="team.html">Team</a></li>
                 <li><a href="publications.html" class="active">Publications</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="ideas.html">Ideas We Support</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="index.html">Home</a>
+                <a href="team.html">Team</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="publications.html">Publications</a>
+                <a href="blog.html">Blog</a>
+                <a href="ideas.html">Ideas We Support</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="page-hero">
+    <section class="hero">
         <div class="container">
             <div class="breadcrumb">
                 <a href="index.html">Home</a> / Publications & Resources
@@ -655,7 +744,7 @@
                         </div>
                     </div>
                     <div class="publication-body">
-                        <p class="publication-abstract">Using original survey data from 2,400 women across rural West Bengal, we examine how participation in government-supported self-help groups affects financial inclusion outcomes. Mixed-methods analysis reveals that collective decision-making processes mediate individual empowerment effects, with significant heterogeneity across caste and class lines.</p>
+                        <p class="publication-abstract">Using original survey data from 2,400 women across rural West Bengal, we examine how participation in government-supported self-help groups affects financial inclusion outcomes. Mixed-methods analysis reveals that collective decision-making processes mediate individual empowerment effects.</p>
                         <div class="publication-tags">
                             <span class="tag">Financial Inclusion</span>
                             <span class="tag">Women's Empowerment</span>
@@ -682,7 +771,7 @@
                         </div>
                     </div>
                     <div class="publication-body">
-                        <p class="publication-abstract">This study employs photovoice methodology with climate migrants in Chittagong's informal settlements to understand barriers to urban service access. Community-led research reveals informal governance networks that both enable and constrain access to health, education, and social protection services.</p>
+                        <p class="publication-abstract">This study employs photovoice methodology with climate migrants in Chittagong's informal settlements to understand barriers to urban service access. Community-led research reveals informal governance networks that both enable and constrain access.</p>
                         <div class="publication-tags">
                             <span class="tag">Climate Migration</span>
                             <span class="tag">Urban Services</span>
@@ -760,7 +849,7 @@
                         </div>
                     </div>
                     <div class="publication-body">
-                        <p class="publication-abstract">Comparative analysis of Aadhaar implementation in social protection programs across five Indian states. Using administrative data and qualitative interviews, we examine how digital identity systems affect inclusion and exclusion in welfare programs, with particular attention to vulnerable populations.</p>
+                        <p class="publication-abstract">Comparative analysis of Aadhaar implementation in social protection programs across five Indian states. Using administrative data and qualitative interviews, we examine how digital identity systems affect inclusion and exclusion in welfare programs.</p>
                         <div class="publication-tags">
                             <span class="tag">Social Protection</span>
                             <span class="tag">Digital Identity</span>
@@ -926,7 +1015,7 @@
         <div class="container">
             <h2>Research Updates</h2>
             <p>Stay informed about our latest research findings, methodological innovations, and opportunities for collaboration. Our quarterly newsletter shares insights from ongoing work across South Asia.</p>
-            <form class="newsletter-form">
+            <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
                 <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
                 <button type="submit" class="newsletter-btn">Subscribe</button>
             </form>
@@ -937,20 +1026,21 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="index.html">Home</a>
-                <a href="index.html#services">Services</a>
-                <a href="index.html#research">Research</a>
-                <a href="insights.html">Insights</a>
-                <a href="learnings.html">Learnings</a>
-                <a href="team.html">Team</a>
-                <a href="publications.html">Publications</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#disclaimer">Disclaimer</a>
+                <a href="#legal">Legal</a>
             </div>
             <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
         </div>
     </footer>
 
     <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
         // Tab navigation
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', function(e) {
@@ -971,13 +1061,44 @@
         });
 
         // Newsletter form
-        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('.newsletter-input').value;
+        function handleNewsletterSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.newsletter-input').value;
             if (email) {
                 alert('Thank you for subscribing! You\'ll receive our quarterly research updates.');
-                this.reset();
+                event.target.reset();
             }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (!event.target.closest('nav')) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe cards for animation
+        document.querySelectorAll('.publication-card, .resource-card, .brief-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
 
         // Smooth scrolling for all links
