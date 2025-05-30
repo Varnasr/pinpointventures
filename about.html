@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pinpoint Ventures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Navigation */
+        .nav-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3498db;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f8f9fa;
+            padding: 15px 0;
+            font-size: 14px;
+        }
+        
+        .breadcrumb a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main Content */
+        .hero-section {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .content-section {
+            padding: 60px 0;
+        }
+        
+        .section-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .founder-section {
+            background: #f8f9fa;
+            padding: 60px 0;
+        }
+        
+        .founder-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .founder-header {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        
+        .founder-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        .founder-info h3 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .founder-info .title {
+            color: #3498db;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .credentials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .credential-tag {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .values-section {
+            background: white;
+            padding: 60px 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-card {
+            padding: 30px;
+            border-radius: 12px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .experience-section {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+        
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .experience-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .experience-item h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .section-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .founder-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="nav-header">
+        <div class="nav-container">
+            <div class="logo">Pinpoint Ventures</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about" class="active">About</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="/">Home</a> > <span>About Us</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Evidence-Driven. Community-Centered.</h1>
+            <p>We believe rigorous research should drive equitable development across South Asia, centering community voices in every study we design.</p>
+        </div>
+    </section>
+
+    <!-- Founder Section -->
+    <section class="founder-section">
+        <div class="container">
+            <h2>Meet Our Founding Director</h2>
+            <div class="founder-card">
+                <div class="founder-header">
+                    <div class="founder-image">VSR</div>
+                    <div class="founder-info">
+                        <h3>Dr. Varna Sri Raman</h3>
+                        <div class="title">Founding Director & Principal Researcher</div>
+                        <div class="credentials">
+                            <span class="credential-tag">Award-Winning Researcher</span>
+                            <span class="credential-tag">Harvard Square Leaders Excellence</span>
+                            <span class="credential-tag">18+ Years Experience</span>
+                        </div>
+                    </div>
+                </div>
+                <p><strong>Dr. Varna Sri Raman</strong> is an award-winning researcher with eighteen years of experience in social research and global development implementation. Her career includes leadership roles at prestigious organizations including Kantar Public, BBC Media Action, and Sesame Street in India.</p>
+                
+                <p>She has worked with leading international development organizations such as UNICEF, the Bill and Melinda Gates Foundation, CARE, and Plan International, delivering cross-sectoral research projects spanning seven countries across four continents. Her expertise covers the full spectrum of development challenges, from health and education policy to women's economic empowerment and climate adaptation.</p>
+                
+                <p>A permanent member of the Harvard Square Leaders Excellence group, Dr. Raman is currently writing a book on Global Development practice focusing on "how to think about prickly problems" - reflecting her approach to tackling complex development challenges through innovative research methodologies.</p>
+                
+                <p>Under her leadership, Pinpoint Ventures has emerged as a trusted partner for development organizations seeking rigorous, community-centered research that drives real policy change across South Asia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Approach Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-grid">
+                <div>
+                    <h2>Our Research Philosophy</h2>
+                    <p>At Pinpoint Ventures, we believe that research should serve communities, not extract from them. Our participatory approach ensures that research questions, methodologies, and tools are co-developed with the people most affected by development policies and programs.</p>
+                    
+                    <p>We combine rigorous quantitative analysis with deep qualitative insights, creating mixed-methods approaches that capture both breadth and depth. Every project is designed with policy impact in mind, translating complex findings into actionable recommendations that can drive systemic change.</p>
+                </div>
+                <div>
+                    <h3>Why Choose Pinpoint Ventures?</h3>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 15px;">✓ <strong>Deep Regional Expertise:</strong> Extensive experience across India, Bangladesh, Sri Lanka, and Pakistan</li>
+                        <li style="margin-bottom: 15px;">✓ <strong>Community-Centered Methods:</strong> Participatory approaches that prioritize local voices</li>
+                        <li style="margin-bottom: 15px;">✓ <strong>Policy-Relevant Research:</strong> Every study designed to inform real-world decisions</li>
+                        <li style="margin-bottom: 15px;">✓ <strong>Mixed-Methods Excellence:</strong> Combining quantitative rigor with qualitative depth</li>
+                        <li style="margin-bottom: 15px;">✓ <strong>Proven Track Record:</strong> Trusted by leading international development organizations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values -->
+    <section class="values-section">
+        <div class="container">
+            <h2>Our Core Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Community Partnership</h3>
+                    <p>Research questions, methodologies, and tools are co-developed with communities. We prioritize participatory approaches that ensure research serves those most affected.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">📊</div>
+                    <h3>Mixed-Methods Excellence</h3>
+                    <p>We combine quantitative and qualitative methods to capture both breadth and depth, revealing patterns while preserving the complexity of lived experiences.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>Policy Impact</h3>
+                    <p>Every research project is designed to inform policy and practice. We translate findings into actionable recommendations that drive systemic change.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Expertise -->
+    <section class="experience-section">
+        <div class="container">
+            <h2>Our Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h4>Social Protection</h4>
+                    <p>NREGA, PDS, pensions, conditional cash transfers, and social safety nets</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Health Systems</h4>
+                    <p>Primary health care, maternal health, WASH, nutrition, and health financing</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Education</h4>
+                    <p>School quality, learning outcomes, vocational training, and digital education</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Social Inclusion</h4>
+                    <p>Women's economic empowerment, social norms, disability inclusion, and LGBTQ+ rights</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Climate & Environment</h4>
+                    <p>Climate adaptation, disaster risk reduction, environmental governance, and just transitions</p>
+                </div>
+                <div class="experience-item">
+                    <h4>Urban Development</h4>
+                    <p>Housing, sanitation, transportation, urban governance, and inclusive cities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Design Research That Drives Change?</h2>
+            <p>Whether you're designing an impact evaluation, need policy analysis, or want to develop participatory research approaches, we're here to support your work.</p>
+            <div class="cta-buttons">
+                <a href="/contact" class="btn btn-primary">Start Your Project</a>
+                <a href="/services" class="btn btn-secondary">Explore Our Services</a>
+                <a href="/portfolio" class="btn btn-secondary">View Our Work</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
