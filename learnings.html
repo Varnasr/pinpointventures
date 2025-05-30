@@ -1,47 +1,807 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Learnings - PinPoint Ventures</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Learnings - PinPoint Ventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .content-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .content-intro h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .content-intro p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Learning Framework */
+        .learning-framework {
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            padding: 4rem 0;
+            margin: 3rem 0;
+            border-radius: 12px;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .framework-pillar {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            border-top: 4px solid #38b2ac;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-pillar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 178, 172, 0.03) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .framework-pillar:hover::before {
+            opacity: 1;
+        }
+
+        .framework-pillar:nth-child(2) { border-top-color: #667eea; }
+        .framework-pillar:nth-child(3) { border-top-color: #764ba2; }
+        .framework-pillar:nth-child(4) { border-top-color: #81e6d9; }
+
+        .framework-pillar:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            border-top-width: 6px;
+        }
+
+        .framework-pillar h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .framework-pillar p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Learnings Grid */
+        .learnings-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .learning-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .learning-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #38b2ac, #667eea, #764ba2, #81e6d9);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .learning-section:hover::before {
+            opacity: 1;
+        }
+
+        .learning-section:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .learning-header {
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+            padding: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .learning-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .learning-section h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .learning-body {
+            padding: 2rem;
+        }
+
+        .learning-story {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #38b2ac;
+            margin-bottom: 2rem;
+        }
+
+        .learning-story h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #38b2ac;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .learning-story p {
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .learning-principles {
+            margin-bottom: 2rem;
+        }
+
+        .learning-principles h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .principles-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .principles-list li {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .principles-list li::before {
+            content: "✓";
+            color: #38b2ac;
+            position: absolute;
+            left: 0;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .learning-application {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .learning-application h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #c53030;
+            margin-bottom: 0.8rem;
+        }
+
+        .learning-application p {
+            color: #744210;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Methodology Spotlight */
+        .methodology-spotlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 12px;
+        }
+
+        .spotlight-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .spotlight-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .spotlight-content p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .spotlight-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .spotlight-feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .spotlight-feature h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .spotlight-feature p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Related Content */
+        .related-content {
+            background: #f8fafc;
+            padding: 4rem 0;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .related-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .related-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1a202c;
+        }
+
+        .related-card p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .related-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .related-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a202c;
+            color: #8b949e;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #8b949e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #58a6ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .framework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spotlight-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav>
-  <div class="logo"><a href="index.html">PinPoint Ventures</a></div>
-  <ul class="nav-links">
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="index.html#services">Services</a></li>
-    <li><a href="insights.html">Insights</a></li>
-    <li><a href="index.html#testimonials">Quotes</a></li>
-    <li><a href="index.html#contact">Contact</a></li>
-  </ul>
-</nav>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="50%" style="stop-color:#764ba2"/>
+                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
+                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2"/>
+                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
+                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                </svg>
+                PinPoint Ventures
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#research">Research</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="learnings.html" class="active">Learnings</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main class="page-content">
-  <h1>What We've Learned</h1>
-  <p>Some principles and practices that guide our work — and help us improve it.</p>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Research Learnings
+            </div>
+            <h1>What We've Learned</h1>
+            <p>Core principles and methodological practices that guide our approach to development research, refined through years of fieldwork across South Asian contexts.</p>
+        </div>
+    </section>
 
-  <section class="learning-block">
-    <h3>1. Listen Before Measuring</h3>
-    <p>In Chhattisgarh, early conversations exposed rainfall patterns and practices missing in official records. Listening first led to better tools — and better data.</p>
-  </section>
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="content-intro">
+                <h2>Principles for Context-Sensitive Research</h2>
+                <p>These learnings emerge from both successes and failures in our work. They represent our evolving understanding of how to conduct research that is both methodologically rigorous and ethically grounded in community needs.</p>
+            </div>
 
-  <section class="learning-block">
-    <h3>2. Don’t Let Tools Lead the Process</h3>
-    <p>In Lucknow, we replaced a top-down logframe exercise with a co-created question-mapping session. The final framework was more honest and usable.</p>
-  </section>
+            <!-- Learning Framework -->
+            <div class="learning-framework">
+                <h3 style="text-align: center; font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: #1a202c;">Our Research Framework</h3>
+                <p style="text-align: center; color: #4a5568; max-width: 600px; margin: 0 auto 2rem; line-height: 1.7;">Four foundational pillars that inform every research project we undertake.</p>
+                <div class="framework-grid">
+                    <div class="framework-pillar">
+                        <h3>Listen First</h3>
+                        <p>Begin every project by understanding community priorities, local knowledge systems, and existing solutions before imposing external frameworks.</p>
+                    </div>
+                    <div class="framework-pillar">
+                        <h3>Adapt Methods</h3>
+                        <p>Modify research tools and approaches based on cultural context, power dynamics, and participant needs rather than rigid adherence to standard protocols.</p>
+                    </div>
+                    <div class="framework-pillar">
+                        <h3>Share Power</h3>
+                        <p>Include communities as co-researchers and decision-makers throughout the research process, not just as data sources.</p>
+                    </div>
+                    <div class="framework-pillar">
+                        <h3>Act on Findings</h3>
+                        <p>Ensure research leads to tangible benefits for participants and communities, whether through policy change, program improvement, or capacity building.</p>
+                    </div>
+                </div>
+            </div>
 
-  <section class="learning-block">
-    <h3>3. Change Is Not Linear</h3>
-    <p>In a school program, enrollment gains dropped due to textbook policy shifts. Nonlinear stories matter — and they need to be documented.</p>
-  </section>
+            <!-- Core Learnings -->
+            <div class="learnings-grid">
+                <!-- Learning 1 -->
+                <div class="learning-section">
+                    <div class="learning-header">
+                        <div class="learning-number">1</div>
+                        <h3>Listen Before Measuring</h3>
+                    </div>
+                    <div class="learning-body">
+                        <div class="learning-story">
+                            <h4>Story from Chhattisgarh</h4>
+                            <p>In a climate adaptation study, official rainfall data suggested one intervention model. But conversations with farmers revealed micro-climate variations and traditional forecasting methods that completely changed our understanding of local water management needs. The community knowledge led to a more effective and locally-appropriate program design.</p>
+                        </div>
 
-  <section class="learning-block">
-    <h3>4. Consent and Context Must Evolve</h3>
-    <p>In a disability inclusion survey in Maharashtra, explaining research goals in relatable terms (not jargon) helped people open up — and improved accuracy.</p>
-  </section>
-</main>
+                        <div class="learning-principles">
+                            <h4>What This Means in Practice</h4>
+                            <ul class="principles-list">
+                                <li>Begin every project with open-ended conversations before developing research instruments</li>
+                                <li>Create space for community members to identify priorities and define problems in their own terms</li>
+                                <li>Map existing knowledge systems and solutions before proposing new interventions</li>
+                                <li>Design research questions collaboratively rather than extractively</li>
+                                <li>Validate external data sources against local knowledge and experience</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-application">
+                            <h4>Application Across Sectors</h4>
+                            <p>This approach has proven essential in health research (understanding care-seeking behavior), education studies (mapping informal learning systems), and livelihoods work (documenting traditional economic practices). Listening first consistently leads to more accurate data and more effective interventions.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning 2 -->
+                <div class="learning-section">
+                    <div class="learning-header">
+                        <div class="learning-number">2</div>
+                        <h3>Methods Must Serve Context, Not Vice Versa</h3>
+                    </div>
+                    <div class="learning-body">
+                        <div class="learning-story">
+                            <h4>Story from Lucknow</h4>
+                            <p>We started a program evaluation using a standard logframe approach that emphasized predetermined indicators. Community partners found this extractive and disconnected from their goals. Switching to collaborative question-mapping sessions produced a framework that was both more honest about uncertainties and more useful for adaptive programming.</p>
+                        </div>
+
+                        <div class="learning-principles">
+                            <h4>Methodological Flexibility Principles</h4>
+                            <ul class="principles-list">
+                                <li>Adapt survey instruments to local languages, concepts, and communication styles</li>
+                                <li>Modify consent processes to align with cultural norms while maintaining ethical standards</li>
+                                <li>Integrate visual, audio, and participatory methods for populations with diverse literacy levels</li>
+                                <li>Allow research timelines to accommodate community rhythms and seasonal patterns</li>
+                                <li>Design feedback mechanisms that work within existing social structures</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-application">
+                            <h4>Balancing Rigor with Responsiveness</h4>
+                            <p>Methodological adaptation doesn't mean sacrificing rigor. Instead, it requires deeper engagement with what constitutes valid and reliable evidence within specific cultural contexts. This often produces more robust findings than rigid adherence to standardized protocols.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning 3 -->
+                <div class="learning-section">
+                    <div class="learning-header">
+                        <div class="learning-number">3</div>
+                        <h3>Change Is Never Linear</h3>
+                    </div>
+                    <div class="learning-body">
+                        <div class="learning-story">
+                            <h4>Story from Rural Madhya Pradesh</h4>
+                            <p>A school improvement program showed steady gains in enrollment for two years, then sudden drops. Linear impact models would have missed that state textbook policy changes were interacting with local economic pressures. Understanding non-linear change patterns led to program adaptations that addressed root causes rather than symptoms.</p>
+                        </div>
+
+                        <div class="learning-principles">
+                            <h4>Embracing Complexity in Research Design</h4>
+                            <ul class="principles-list">
+                                <li>Design evaluation frameworks that can capture unexpected outcomes and feedback loops</li>
+                                <li>Include multiple measurement points to understand change trajectories, not just end points</li>
+                                <li>Map external factors and contextual changes that might influence program outcomes</li>
+                                <li>Create space for participant-defined indicators of change that may not follow linear patterns</li>
+                                <li>Document both intended and unintended consequences of interventions</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-application">
+                            <h4>Implications for Program Learning</h4>
+                            <p>Non-linear change patterns require research designs that support adaptive programming. This means building in regular reflection cycles, maintaining flexible data collection systems, and creating feedback loops that allow programs to adjust strategies based on emerging evidence.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning 4 -->
+                <div class="learning-section">
+                    <div class="learning-header">
+                        <div class="learning-number">4</div>
+                        <h3>Consent and Context Must Evolve Together</h3>
+                    </div>
+                    <div class="learning-body">
+                        <div class="learning-story">
+                            <h4>Story from Maharashtra</h4>
+                            <p>In a disability inclusion survey, standard consent forms created barriers because they used technical language and assumed individual decision-making. Working with disabled people's organizations, we developed ongoing consent processes that respected both individual autonomy and family/community consultation practices. Participation increased and data quality improved significantly.</p>
+                        </div>
+
+                        <div class="learning-principles">
+                            <h4>Culturally-Responsive Ethical Practices</h4>
+                            <ul class="principles-list">
+                                <li>Develop consent processes that align with local decision-making norms while protecting individual rights</li>
+                                <li>Create multilingual and visual consent materials for diverse literacy levels</li>
+                                <li>Establish ongoing consent protocols for longitudinal research relationships</li>
+                                <li>Build community review processes into research design and implementation</li>
+                                <li>Ensure data ownership and sharing agreements reflect community values and needs</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-application">
+                            <h4>Beyond Procedural Ethics</h4>
+                            <p>Ethical research requires more than institutional review board approval. It demands ongoing relationship-building, transparent communication about research benefits and risks, and genuine commitment to ensuring research serves participant communities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning 5 -->
+                <div class="learning-section">
+                    <div class="learning-header">
+                        <div class="learning-number">5</div>
+                        <h3>Mixed Methods Must Be Truly Integrated</h3>
+                    </div>
+                    <div class="learning-body">
+                        <div class="learning-story">
+                            <h4>Story from Assam Tea Gardens</h4>
+                            <p>A maternal health evaluation showed positive quantitative outcomes, but ethnographic research revealed that the intervention was working well for permanent workers while failing temporary laborers. The quantitative data masked crucial equity dimensions that only became visible through integrated qualitative analysis. This led to program redesign that addressed structural inequalities.</p>
+                        </div>
+
+                        <div class="learning-principles">
+                            <h4>Integration Strategies</h4>
+                            <ul class="principles-list">
+                                <li>Design qualitative and quantitative components to inform and validate each other</li>
+                                <li>Create analysis frameworks that can synthesize different types of evidence</li>
+                                <li>Use qualitative findings to interpret quantitative patterns and vice versa</li>
+                                <li>Include community members in data interpretation and meaning-making processes</li>
+                                <li>Report findings in ways that preserve the complexity revealed by mixed methods</li>
+                            </ul>
+                        </div>
+
+                        <div class="learning-application">
+                            <h4>Beyond Parallel Data Collection</h4>
+                            <p>True mixed methods integration requires iterative design where findings from one method shape data collection and analysis in another. This approach reveals how interventions work differently across populations and contexts, leading to more effective and equitable programming.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Spotlight -->
+    <section class="methodology-spotlight">
+        <div class="container">
+            <div class="spotlight-content">
+                <h2>Our Signature Approach: Community-Led Research</h2>
+                <p>We've developed a participatory research methodology that trains community members as co-researchers while maintaining academic rigor. This approach has proven particularly effective in conflict-affected areas, with marginalized populations, and for sensitive research topics.</p>
+                
+                <div class="spotlight-features">
+                    <div class="spotlight-feature">
+                        <h4>Capacity Building</h4>
+                        <p>Community members develop research skills that serve long-term advocacy and evaluation needs.</p>
+                    </div>
+                    <div class="spotlight-feature">
+                        <h4>Cultural Sensitivity</h4>
+                        <p>Local researchers understand context and can access information that would be difficult for outsiders to obtain.</p>
+                    </div>
+                    <div class="spotlight-feature">
+                        <h4>Ethical Safeguards</h4>
+                        <p>Community-led research creates natural protections against extractive or harmful research practices.</p>
+                    </div>
+                    <div class="spotlight-feature">
+                        <h4>Sustainable Impact</h4>
+                        <p>Research relationships continue beyond project timelines, supporting ongoing learning and adaptation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Content -->
+    <section class="related-content">
+        <div class="container">
+            <h2 class="section-title">Continue Exploring</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <h4>Field Insights</h4>
+                    <p>See how these learnings play out in specific research contexts through detailed stories from our recent projects.</p>
+                    <a href="insights.html">Read field insights →</a>
+                </div>
+                <div class="related-card">
+                    <h4>Research Portfolio</h4>
+                    <p>Explore examples of our research across different sectors and regions, showcasing applied methodological approaches.</p>
+                    <a href="index.html#research">View our research →</a>
+                </div>
+                <div class="related-card">
+                    <h4>Collaborate</h4>
+                    <p>Interested in applying these approaches to your research questions? Let's discuss how we can support your work.</p>
+                    <a href="index.html#contact">Start a conversation →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#research">Research</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="team.html">Team</a>
+                <a href="publications.html">Publications</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
+        </div>
+    </footer>
 </body>
 </html>
