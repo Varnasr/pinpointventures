@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications & Resources - PinPoint Ventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #81e6d9 0%, #38b2ac 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        /* Content Navigation */
+        .content-nav {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.8rem;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .nav-tab:hover::before,
+        .nav-tab.active::before {
+            left: 0;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Publications Section */
+        .publications {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .publications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .publication-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .publication-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #38b2ac, #667eea, #764ba2, #81e6d9);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .publication-card:hover::before {
+            opacity: 1;
+        }
+
+        .publication-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .publication-header {
+            padding: 2rem 2rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        }
+
+        .publication-type {
+            display: inline-block;
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .publication-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #1a202c;
+            line-height: 1.4;
+        }
+
+        .publication-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .publication-body {
+            padding: 1.5rem 2rem;
+        }
+
+        .publication-abstract {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .publication-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            background: #e2e8f0;
+            color: #4a5568;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .publication-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .pub-link {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pub-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .pub-link:hover::before {
+            left: 100%;
+        }
+
+        .pub-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .pub-link.secondary {
+            background: transparent;
+            color: #667eea;
+            border: 1px solid #667eea;
+        }
+
+        .pub-link.secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Resources Section */
+        .resources {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 4px solid #38b2ac;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 178, 172, 0.03) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .resource-card:hover::before {
+            opacity: 1;
+        }
+
+        .resource-card:nth-child(2n) { border-left-color: #667eea; }
+        .resource-card:nth-child(3n) { border-left-color: #764ba2; }
+
+        .resource-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-left-width: 6px;
+        }
+
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .resource-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .resource-card p {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .resource-link {
+            color: #38b2ac;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Policy Briefs Section */
+        .policy-briefs {
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .briefs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .brief-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .brief-card:nth-child(2n) { border-top-color: #764ba2; }
+        .brief-card:nth-child(3n) { border-top-color: #38b2ac; }
+
+        .brief-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .brief-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .brief-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #1a202c;
+        }
+
+        .brief-card p {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .brief-date {
+            font-size: 0.85rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 178, 172, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0d1117;
+            color: #8b949e;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #8b949e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #58a6ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .publications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="50%" style="stop-color:#764ba2"/>
+                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
+                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2"/>
+                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
+                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                </svg>
+                PinPoint Ventures
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#research">Research</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="learnings.html">Learnings</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="publications.html" class="active">Publications</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Publications & Resources
+            </div>
+            <h1>Knowledge for Impact</h1>
+            <p>Research publications, methodological tools, and policy resources from our work across South Asia. Open access materials to support the development research community.</p>
+        </div>
+    </section>
+
+    <!-- Content Navigation -->
+    <section class="content-nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <a href="#publications" class="nav-tab active">Research Publications</a>
+                <a href="#resources" class="nav-tab">Methodology Tools</a>
+                <a href="#policy-briefs" class="nav-tab">Policy Briefs</a>
+                <a href="#newsletter" class="nav-tab">Newsletter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2 class="section-title">Recent Publications</h2>
+            <p class="section-subtitle">Peer-reviewed research and working papers from our team's work across development sectors in South Asia.</p>
+            
+            <div class="publications-grid">
+                <!-- Publication 1 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Journal Article</span>
+                        <h3>Women's Collective Action and Financial Inclusion: Evidence from Self-Help Groups in West Bengal</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Sharma, R., Patel, A.</span>
+                            <span><strong>Journal:</strong> Development Policy Review</span>
+                            <span><strong>Year:</strong> 2024</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">Using original survey data from 2,400 women across rural West Bengal, we examine how participation in government-supported self-help groups affects financial inclusion outcomes. Mixed-methods analysis reveals that collective decision-making processes mediate individual empowerment effects, with significant heterogeneity across caste and class lines.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Financial Inclusion</span>
+                            <span class="tag">Women's Empowerment</span>
+                            <span class="tag">Mixed Methods</span>
+                            <span class="tag">India</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Full Text (Open Access)</a>
+                            <a href="#" class="pub-link secondary">Dataset</a>
+                            <a href="#" class="pub-link secondary">Policy Brief</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Publication 2 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Working Paper</span>
+                        <h3>Climate Migration and Urban Service Access: Participatory Research from Bangladesh</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Hassan, T., Fernando, N.</span>
+                            <span><strong>Series:</strong> PinPoint Working Papers</span>
+                            <span><strong>Year:</strong> 2024</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">This study employs photovoice methodology with climate migrants in Chittagong's informal settlements to understand barriers to urban service access. Community-led research reveals informal governance networks that both enable and constrain access to health, education, and social protection services.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Climate Migration</span>
+                            <span class="tag">Urban Services</span>
+                            <span class="tag">Photovoice</span>
+                            <span class="tag">Bangladesh</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Download PDF</a>
+                            <a href="#" class="pub-link secondary">Photo Gallery</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Publication 3 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Book Chapter</span>
+                        <h3>Participatory Evaluation in Conflict-Affected Areas: Lessons from Northeast India</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Patel, A., Kumari, S.</span>
+                            <span><strong>Book:</strong> Community-Led Research in South Asia</span>
+                            <span><strong>Year:</strong> 2024</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">Drawing on fieldwork in Manipur, we analyze how community-based participatory research can address ethical challenges of conducting research with conflict-affected populations. The chapter provides a framework for trauma-informed and culturally responsive evaluation approaches.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Participatory Research</span>
+                            <span class="tag">Conflict Settings</span>
+                            <span class="tag">Ethics</span>
+                            <span class="tag">Northeast India</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Publisher Link</a>
+                            <a href="#" class="pub-link secondary">Preprint</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Publication 4 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Impact Evaluation</span>
+                        <h3>Digital Financial Services for Garment Workers: RCT Evidence from Dhaka</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Hassan, T., Khanna, A.</span>
+                            <span><strong>Client:</strong> International Labour Organization</span>
+                            <span><strong>Year:</strong> 2023</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">Randomized controlled trial with 3,000 garment workers evaluating mobile money training programs. Results show significant increases in savings behavior and remittance efficiency, with particularly strong effects for women workers with primary education or higher.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Digital Finance</span>
+                            <span class="tag">Labor Migration</span>
+                            <span class="tag">RCT</span>
+                            <span class="tag">Bangladesh</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Executive Summary</a>
+                            <a href="#" class="pub-link secondary">Technical Report</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Publication 5 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Policy Analysis</span>
+                        <h3>Social Protection and Digital Identity: Aadhaar Implementation Across Indian States</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Sharma, R., Patel, A., Kumari, S.</span>
+                            <span><strong>Journal:</strong> Economic & Political Weekly</span>
+                            <span><strong>Year:</strong> 2023</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">Comparative analysis of Aadhaar implementation in social protection programs across five Indian states. Using administrative data and qualitative interviews, we examine how digital identity systems affect inclusion and exclusion in welfare programs, with particular attention to vulnerable populations.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Social Protection</span>
+                            <span class="tag">Digital Identity</span>
+                            <span class="tag">Policy Analysis</span>
+                            <span class="tag">India</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Full Article</a>
+                            <a href="#" class="pub-link secondary">Data Visualization</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Publication 6 -->
+                <article class="publication-card">
+                    <div class="publication-header">
+                        <span class="publication-type">Methodology</span>
+                        <h3>Adapting Survey Methods for Low-Literacy Populations: Field Experiences from South Asia</h3>
+                        <div class="publication-meta">
+                            <span><strong>Authors:</strong> Khanna, A., Fernando, N.</span>
+                            <span><strong>Journal:</strong> Survey Research Methods</span>
+                            <span><strong>Year:</strong> 2023</span>
+                        </div>
+                    </div>
+                    <div class="publication-body">
+                        <p class="publication-abstract">This methodological paper presents innovations in survey design for populations with limited literacy, drawing on field experiences across India, Bangladesh, and Sri Lanka. We evaluate audio-based questioning, visual response scales, and mobile data collection adaptations.</p>
+                        <div class="publication-tags">
+                            <span class="tag">Survey Methods</span>
+                            <span class="tag">Literacy</span>
+                            <span class="tag">Technology</span>
+                            <span class="tag">South Asia</span>
+                        </div>
+                        <div class="publication-links">
+                            <a href="#" class="pub-link">Open Access</a>
+                            <a href="#" class="pub-link secondary">Survey Tools</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="resources">
+        <div class="container">
+            <h2 class="section-title">Research Tools & Methodologies</h2>
+            <p class="section-subtitle">Open-source tools, templates, and guides developed through our field experience to support community-centered research practices.</p>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <h3>Participatory MEL Toolkit</h3>
+                    <p>Complete framework for designing monitoring, evaluation, and learning systems with community participation. Includes visual tracking tools, reflection guides, and adaptation protocols tested across 15+ projects.</p>
+                    <a href="#" class="resource-link">Download Toolkit →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎤</div>
+                    <h3>Ethical Consent Templates</h3>
+                    <p>Culturally-adapted consent processes for research with adolescents, conflict-affected populations, and marginalized communities. Available in Hindi, Bengali, Tamil, Sinhala, and Urdu.</p>
+                    <a href="#" class="resource-link">Access Templates →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📱</div>
+                    <h3>Mobile Data Collection Guide</h3>
+                    <p>Step-by-step guide for implementing mobile data collection in low-resource settings, including offline capabilities, multimedia integration, and quality assurance protocols.</p>
+                    <a href="#" class="resource-link">View Guide →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🗺️</div>
+                    <h3>Community Mapping Protocols</h3>
+                    <p>Methodology for participatory community mapping covering resource mapping, service access analysis, and vulnerability assessments. Includes facilitator training materials.</p>
+                    <a href="#" class="resource-link">Download Protocols →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📊</div>
+                    <h3>Mixed Methods Integration Framework</h3>
+                    <p>Analytical framework for integrating qualitative and quantitative data in development research, with examples from health, education, and livelihoods studies.</p>
+                    <a href="#" class="resource-link">Access Framework →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">🎯</div>
+                    <h3>Impact Evaluation Design Template</h3>
+                    <p>Template for designing rigorous impact evaluations in development contexts, including power calculations, randomization protocols, and attrition management strategies.</p>
+                    <a href="#" class="resource-link">Get Template →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">👥</div>
+                    <h3>Community-Led Research Training</h3>
+                    <p>Training curriculum for building local research capacity, covering research ethics, data collection methods, and analysis techniques adapted for community researchers.</p>
+                    <a href="#" class="resource-link">View Curriculum →</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">📈</div>
+                    <h3>Data Visualization for Communities</h3>
+                    <p>Tools and templates for creating accessible data visualizations that communicate research findings to diverse audiences, including low-literacy populations.</p>
+                    <a href="#" class="resource-link">Download Tools →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Policy Briefs Section -->
+    <section id="policy-briefs" class="policy-briefs">
+        <div class="container">
+            <h2 class="section-title">Policy Briefs</h2>
+            <p class="section-subtitle">Concise, evidence-based recommendations for policymakers based on our research findings across South Asia.</p>
+            
+            <div class="briefs-grid">
+                <div class="brief-card">
+                    <div class="brief-number">01</div>
+                    <h4>Strengthening NREGA Implementation: Lessons from Bihar</h4>
+                    <p>Analysis of implementation challenges and community-driven solutions for improving the National Rural Employment Guarantee Act in Bihar state.</p>
+                    <div class="brief-date">March 2024</div>
+                </div>
+
+                <div class="brief-card">
+                    <div class="brief-number">02</div>
+                    <h4>Digital Financial Inclusion for Women: Policy Recommendations</h4>
+                    <p>Evidence-based recommendations for expanding digital financial services to rural women based on multi-state research in India.</p>
+                    <div class="brief-date">February 2024</div>
+                </div>
+
+                <div class="brief-card">
+                    <div class="brief-number">03</div>
+                    <h4>Climate Adaptation and Social Protection Integration</h4>
+                    <p>Framework for integrating climate resilience measures into existing social protection programs across South Asian countries.</p>
+                    <div class="brief-date">January 2024</div>
+                </div>
+
+                <div class="brief-card">
+                    <div class="brief-number">04</div>
+                    <h4>Improving Maternal Health Services in Post-Conflict Areas</h4>
+                    <p>Policy recommendations for delivering maternal health services in conflict-affected regions, based on research in Sri Lanka and Northeast India.</p>
+                    <div class="brief-date">December 2023</div>
+                </div>
+
+                <div class="brief-card">
+                    <div class="brief-number">05</div>
+                    <h4>Urban Service Delivery for Climate Migrants</h4>
+                    <p>Policy framework for ensuring climate migrants in urban areas can access essential services, with case studies from Dhaka and Mumbai.</p>
+                    <div class="brief-date">November 2023</div>
+                </div>
+
+                <div class="brief-card">
+                    <div class="brief-number">06</div>
+                    <h4>Participatory Budgeting in Rural India: Scaling Up Success</h4>
+                    <p>Analysis of successful participatory budgeting models and recommendations for scaling community-driven resource allocation.</p>
+                    <div class="brief-date">October 2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="newsletter">
+        <div class="container">
+            <h2>Research Updates</h2>
+            <p>Stay informed about our latest research findings, methodological innovations, and opportunities for collaboration. Our quarterly newsletter shares insights from ongoing work across South Asia.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#research">Research</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="team.html">Team</a>
+                <a href="publications.html">Publications</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all tabs
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Smooth scroll to target section
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Newsletter form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('.newsletter-input').value;
+            if (email) {
+                alert('Thank you for subscribing! You\'ll receive our quarterly research updates.');
+                this.reset();
+            }
+        });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
