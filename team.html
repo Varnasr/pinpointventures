@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - PinPoint Ventures</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2d3748;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        /* Our Story Section */
+        .our-story {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #1a202c;
+        }
+
+        .story-text p {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .story-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #4a5568;
+            font-weight: 500;
+        }
+
+        .story-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Values Section */
+        .values-section {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #4a5568;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 4px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.03) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-card:nth-child(2) { border-top-color: #764ba2; }
+        .value-card:nth-child(3) { border-top-color: #38b2ac; }
+        .value-card:nth-child(4) { border-top-color: #81e6d9; }
+
+        .value-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-top-width: 6px;
+        }
+
+        .value-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .value-card p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: #f8fafc;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #38b2ac, #81e6d9);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .team-member:hover::before {
+            opacity: 1;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-header {
+            padding: 2rem 2rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .member-name {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .member-title {
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .member-body {
+            padding: 2rem;
+        }
+
+        .member-bio {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .member-expertise {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #38b2ac;
+        }
+
+        .member-expertise h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #38b2ac;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .expertise-tag {
+            background: #f8fafc;
+            color: #4a5568;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Affiliations Section */
+        .affiliations {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        }
+
+        .affiliations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .affiliation-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .affiliation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .affiliation-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+        }
+
+        .affiliation-card p {
+            color: #4a5568;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Join Us Section */
+        .join-us {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .join-us h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .join-us p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .join-cta {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #38b2ac 0%, #81e6d9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .join-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(56, 178, 172, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #0d1117;
+            color: #8b949e;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #8b949e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #58a6ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .story-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .story-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <svg class="logo-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="50%" style="stop-color:#764ba2"/>
+                            <stop offset="100%" style="stop-color:#38b2ac"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M50 15 C35 15, 25 25, 25 40 C25 55, 45 75, 50 85 C55 75, 75 55, 75 40 C75 25, 65 15, 50 15 Z" 
+                          fill="url(#logoGrad)" stroke="#2d3748" stroke-width="2"/>
+                    <circle cx="50" cy="40" r="8" fill="white" stroke="#2d3748" stroke-width="1.5"/>
+                    <path d="M15 25 L20 28 L18 32 L25 30" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M80 30 L85 27 L88 33 L82 35" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.7"/>
+                    <path d="M20 65 L15 68 L18 72 L25 70" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.7"/>
+                </svg>
+                PinPoint Ventures
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#research">Research</a></li>
+                <li><a href="insights.html">Insights</a></li>
+                <li><a href="learnings.html">Learnings</a></li>
+                <li><a href="team.html" class="active">Team</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / Our Team
+            </div>
+            <h1>The People Behind PinPoint</h1>
+            <p>A diverse team of researchers, economists, and field practitioners united by our commitment to community-centered research and equitable development across South Asia.</p>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="our-story">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Our Journey</h2>
+                    <p>PinPoint Ventures emerged from years of field experience across South Asia, where we witnessed both the power of rigorous research and the limitations of extractive research practices that failed to serve communities.</p>
+                    <p>Founded by development practitioners who had worked in government, academia, and civil society, we established PinPoint to bridge the gap between methodological rigor and community-centered approaches.</p>
+                    <p>Today, we combine deep technical expertise with extensive networks across India, Bangladesh, Sri Lanka, and Pakistan, enabling us to conduct research that is both academically sound and contextually grounded.</p>
+                    
+                    <div class="story-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Research Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Countries</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Sectors</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-visual">
+                    <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- South Asia map sketch -->
+                        <defs>
+                            <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8"/>
+                                <stop offset="100%" style="stop-color:#38b2ac;stop-opacity:0.8"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Stylized South Asia outline -->
+                        <path d="M100 80 Q150 60, 200 80 Q250 70, 300 90 Q320 110, 310 140 Q300 170, 280 190 Q250 210, 200 200 Q150 190, 120 170 Q90 140, 100 80 Z" 
+                              fill="url(#mapGrad)" stroke="#2d3748" stroke-width="2" opacity="0.7"/>
+                        
+                        <!-- Research location dots -->
+                        <circle cx="150" cy="120" r="5" fill="#667eea"/>
+                        <circle cx="200" cy="130" r="5" fill="#764ba2"/>
+                        <circle cx="250" cy="140" r="5" fill="#38b2ac"/>
+                        <circle cx="180" cy="160" r="5" fill="#81e6d9"/>
+                        <circle cx="220" cy="110" r="5" fill="#667eea"/>
+                        
+                        <!-- Connection lines between locations -->
+                        <path d="M150 120 Q175 125, 200 130" stroke="#667eea" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        <path d="M200 130 Q225 135, 250 140" stroke="#764ba2" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        <path d="M200 130 Q190 145, 180 160" stroke="#38b2ac" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        <path d="M220 110 Q235 125, 250 140" stroke="#81e6d9" stroke-width="1.5" fill="none" opacity="0.6"/>
+                        
+                        <!-- Decorative elements -->
+                        <text x="50" y="50" font-family="Poppins" font-size="12" font-weight="600" fill="#4a5568">Research</text>
+                        <text x="50" y="65" font-family="Poppins" font-size="12" font-weight="600" fill="#4a5568">Network</text>
+                        
+                        <text x="320" y="50" font-family="Poppins" font-size="12" font-weight="600" fill="#4a5568">South</text>
+                        <text x="320" y="65" font-family="Poppins" font-size="12" font-weight="600" fill="#4a5568">Asia</text>
+                        
+                        <!-- Sketchy border -->
+                        <rect x="10" y="10" width="380" height="280" fill="none" stroke="#e2e8f0" stroke-width="2" rx="8" stroke-dasharray="5,3" opacity="0.5"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Our Values</h2>
+            <p class="section-subtitle">These principles guide how we approach research, build relationships, and measure success in our work.</p>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Partnership</h3>
+                    <p>We work with communities as partners, not subjects, ensuring research serves local priorities and builds long-term relationships based on mutual respect and shared learning.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔍</div>
+                    <h3>Rigor</h3>
+                    <p>We maintain the highest standards of methodological quality while adapting approaches to fit context, ensuring our research can inform policy and withstand academic scrutiny.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚖️</div>
+                    <h3>Equity</h3>
+                    <p>We center marginalized voices and examine how development interventions affect different groups, with particular attention to power dynamics and structural inequalities.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌱</div>
+                    <h3>Impact</h3>
+                    <p>We measure success by whether our research leads to better policies, stronger programs, and improved outcomes for the communities we work with across South Asia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">Experienced researchers and practitioners with deep expertise across development sectors and South Asian contexts.</p>
+            
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">DR</div>
+                        <div class="member-name">Dr. Ravi Sharma</div>
+                        <div class="member-title">Founding Director & Senior Research Fellow</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Development economist with 15+ years experience in impact evaluation and policy analysis across South Asia. Former Senior Research Fellow at Institute for Policy Research, Delhi, and consultant to World Bank, UNDP. PhD in Economics from Delhi School of Economics.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Impact Evaluation</span>
+                                <span class="expertise-tag">Social Protection</span>
+                                <span class="expertise-tag">Labor Economics</span>
+                                <span class="expertise-tag">Econometrics</span>
+                                <span class="expertise-tag">Policy Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">AP</div>
+                        <div class="member-name">Asha Patel</div>
+                        <div class="member-title">Research Director & Participatory Methods Lead</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Social researcher specializing in participatory research methods and gender studies. Former Program Manager at Centre for Budget and Governance Accountability. Extensive fieldwork experience across rural India and Bangladesh. MA in Development Studies from Jawaharlal Nehru University.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Participatory Research</span>
+                                <span class="expertise-tag">Gender Analysis</span>
+                                <span class="expertise-tag">Community Mobilization</span>
+                                <span class="expertise-tag">Qualitative Methods</span>
+                                <span class="expertise-tag">SRHR</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">TH</div>
+                        <div class="member-name">Tariq Hassan</div>
+                        <div class="member-title">Senior Research Associate & Climate Specialist</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Environmental economist with expertise in climate adaptation and rural livelihoods. Former Research Associate at International Centre for Climate Change and Development, Dhaka. Fluent in Bengali, Hindi, and Urdu. MSc in Environmental Economics from University of Dhaka.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Climate Economics</span>
+                                <span class="expertise-tag">Rural Livelihoods</span>
+                                <span class="expertise-tag">Agricultural Policy</span>
+                                <span class="expertise-tag">Mixed Methods</span>
+                                <span class="expertise-tag">Bangladesh Context</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">SK</div>
+                        <div class="member-name">Sita Kumari</div>
+                        <div class="member-title">Field Research Coordinator & Community Liaison</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Community development practitioner with 12+ years experience in participatory research and program implementation. Former District Coordinator for state government social protection programs in Bihar. Expert in community engagement and local governance systems.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Community Engagement</span>
+                                <span class="expertise-tag">Local Governance</span>
+                                <span class="expertise-tag">Field Coordination</span>
+                                <span class="expertise-tag">Hindi/Bhojpuri</span>
+                                <span class="expertise-tag">Rural Communities</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">NF</div>
+                        <div class="member-name">Nadira Fernando</div>
+                        <div class="member-title">Research Associate & Health Systems Specialist</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Public health researcher with expertise in health systems strengthening and maternal health. Former Program Officer at Family Planning Association of Sri Lanka. Experience conducting research in conflict-affected areas. MPH from University of Colombo.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Health Systems</span>
+                                <span class="expertise-tag">Maternal Health</span>
+                                <span class="expertise-tag">Conflict Settings</span>
+                                <span class="expertise-tag">Sinhala/Tamil</span>
+                                <span class="expertise-tag">Survey Design</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-member">
+                    <div class="member-header">
+                        <div class="member-avatar">AK</div>
+                        <div class="member-name">Arjun Khanna</div>
+                        <div class="member-title">Data Analyst & Technology Lead</div>
+                    </div>
+                    <div class="member-body">
+                        <p class="member-bio">Data scientist with experience in development sector applications. Former analyst at India's National Sample Survey Office. Expertise in big data applications for development and mobile data collection systems. BTech in Computer Science from IIT Delhi.</p>
+                        <div class="member-expertise">
+                            <h4>Expertise</h4>
+                            <div class="expertise-tags">
+                                <span class="expertise-tag">Data Science</span>
+                                <span class="expertise-tag">Statistical Analysis</span>
+                                <span class="expertise-tag">Mobile Data Collection</span>
+                                <span class="expertise-tag">R/Python/Stata</span>
+                                <span class="expertise-tag">GIS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affiliations Section -->
+    <section class="affiliations">
+        <div class="container">
+            <h2 class="section-title">Professional Networks & Affiliations</h2>
+            <div class="affiliations-grid">
+                <div class="affiliation-card">
+                    <h4>Indian Association for the Study of Population</h4>
+                    <p>Active members contributing to demographic and health research discourse in India</p>
+                </div>
+                <div class="affiliation-card">
+                    <h4>South Asian Network for Development Economics</h4>
+                    <p>Collaborating researchers across Bangladesh, India, Pakistan, and Sri Lanka</p>
+                </div>
+                <div class="affiliation-card">
+                    <h4>International Development Research Centre</h4>
+                    <p>Research partners and grantees for climate adaptation and governance studies</p>
+                </div>
+                <div class="affiliation-card">
+                    <h4>Gender and Development Network</h4>
+                    <p>Contributing to feminist research methodologies and gender-responsive evaluations</p>
+                </div>
+                <div class="affiliation-card">
+                    <h4>Participatory Research in Asia</h4>
+                    <p>Network of practitioners advancing community-based research approaches</p>
+                </div>
+                <div class="affiliation-card">
+                    <h4>Climate Development Knowledge Network</h4>
+                    <p>Regional experts on climate change adaptation and policy research</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Us Section -->
+    <section class="join-us">
+        <div class="container">
+            <h2>Join Our Team</h2>
+            <p>We're always looking for passionate researchers and practitioners who share our commitment to community-centered research and equitable development. If you're interested in contributing to policy-relevant research across South Asia, we'd love to hear from you.</p>
+            <a href="index.html#contact" class="join-cta">Explore Opportunities</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#research">Research</a>
+                <a href="insights.html">Insights</a>
+                <a href="learnings.html">Learnings</a>
+                <a href="team.html">Team</a>
+                <a href="publications.html">Publications</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <p>&copy; 2025 PinPoint Ventures. Rigorous research for equitable development across South Asia.</p>
+        </div>
+    </footer>
+</body>
+</html>
