@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this project in your research, please cite it as below."
+type: software
+title: "Pinpoint Ventures: Research and Evaluation Services"
+authors:
+  - family-names: Raman
+    given-names: Varna Sri
+url: "https://github.com/Varnasr/pinpointventures"
+repository-code: "https://github.com/Varnasr/pinpointventures"
+license: MIT
+keywords:
+  - research
+  - evaluation
+  - social-impact
+  - development
+
+date-released: "2025-01-01"
